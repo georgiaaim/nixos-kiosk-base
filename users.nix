@@ -20,7 +20,7 @@ let
                builtins.readFile kioskAdminTomasSSHKeys + "\n" + 
                builtins.readFile kioskAdminMarcusSSHKeys;
 
-  sshKeys = builtins.filter (s: s != "") (lib.splitString "\n" contents);
+  sshKeys = builtins.filter (s: s != "") (lib.splitString "\n" allSSHKeys);
 in
 {
   options = {
