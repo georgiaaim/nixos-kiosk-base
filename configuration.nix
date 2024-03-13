@@ -21,15 +21,11 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Desktop Environment and Display Manager
-  #services.xserver.enable = true;
-  #services.xserver.displayManager.sddm.enable = true;
-  #services.xserver.desktopManager.plasma6.enable = true;
-
-  services.cage = {
-    enable = true;
-    program = "firefox --kiosk http://localhost:8123";
-    user = "kiosk";
-  }
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma6.enable = true;
+  services.xserver.displayManager.sddm.autoLogin.user = "kiosk";
+  services.xserver.displayManager.sddm.autoLogin.enable = true;
 
   # Enable CUPS for printing
   services.printing.enable = true;

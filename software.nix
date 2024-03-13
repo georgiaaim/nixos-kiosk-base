@@ -19,6 +19,8 @@
 
   environment.systemPackages = with pkgs; [
     parted
+    sway
+    firefox
   ];
 
   networking.firewall.allowedTCPPorts = [ 8123 ];
