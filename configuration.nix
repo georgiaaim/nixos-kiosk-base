@@ -10,7 +10,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # System-wide configurations
-  networking.hostName = "kiosk_base";
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -23,9 +23,9 @@
   # Desktop Environment and Display Manager
   services.xserver.enable = true;
   services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.autoLogin.enable = true;
   services.xserver.desktopManager.plasma6.enable = true;
   services.xserver.displayManager.sddm.autoLogin.user = "kiosk";
-  services.xserver.displayManager.sddm.autoLogin.enable = true;
 
   # Enable CUPS for printing
   services.printing.enable = true;

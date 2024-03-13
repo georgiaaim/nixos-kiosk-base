@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
-
+let 
+  startFirefoxKiosk = pkgs.writeShellScriptBin "start-firefox-kiosk" ''
+    #!/usr/bin/env bash
+    ${pkgs.firefox}/bin/firefox --kiosk http://localhost:8123
+  '';
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -70,14 +75,6 @@
     [KDE Action Restrictions]
     
   '';
-  
-  let 
-    startFirefoxKiosk = pkgs.writeShellScriptBin "start-firefox-kiosk" ''
-      #!/usr/bin/env bash
-      ${pkgs.firefox}/bin/firefox --kiosk http://localhost:8123
-    '';
-  in
-    home.file.".config/autostart-scripts/start-firefox-kiosk.sh".text = startFirefoxKiosk
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

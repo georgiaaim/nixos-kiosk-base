@@ -16,8 +16,8 @@ let
     sha256 = "011pm4ld3h1h2zf9rzlzm8x6hqf1kg2w7rc70rkx3dm66jf5l7b3";
   };
 
-  allSSHKeys = builtins.readFile kioskAdminHunterSSHKeys + "\n" + \
-               builtins.readFile kioskAdminTomasSSHKeys + "\n" + \
+  allSSHKeys = builtins.readFile kioskAdminHunterSSHKeys + "\n" + 
+               builtins.readFile kioskAdminTomasSSHKeys + "\n" + 
                builtins.readFile kioskAdminMarcusSSHKeys;
 
   sshKeys = builtins.filter (s: s != "") (lib.splitString "\n" contents);
@@ -25,7 +25,7 @@ in
 {
   options = {
     services.kioskAdmin = {
-      enable = lib.mkEnableOption "KioskAdmin user service";
+      enable = lib.mkEnableOption "kioskadmin user service";
     };
   };
 
