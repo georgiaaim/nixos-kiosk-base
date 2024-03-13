@@ -12,13 +12,9 @@
       system = "x86_64-linux";
       modules = [
         home-manager.nixosModules.home-manager 
-        /etc/nixos/hardware-configuration.nix
         ./configuration.nix
         ./users.nix
-        ({pkgs, lib, ...}: {
-          services.kioskAdmin.enable = true;
-        })
-	./software.nix
+      	./software.nix
       ];
     };
   };

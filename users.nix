@@ -34,7 +34,7 @@ in
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
-    home-manager.users.KioskAdmin = import ./home.nix;
+    home-manager.users.kioskadmin = import ./home.nix;
 
     programs.neovim.enable = true;
     programs.zsh = {
