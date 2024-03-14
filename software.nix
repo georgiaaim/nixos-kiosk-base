@@ -19,10 +19,17 @@ in
     after = [ "local-fs.target" ];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "${pkgs.qemu}/bin/qemu-nbd --connect=/dev/nbd0 ${home-assistant-qcow2}";
+      ExecStartPre = ''
+        if [ ! -f /etc/home-assistant.qcow2 ]; then
+          cp ${home-assistant-qcow2} /etc/home-assistant.qcow2
+        fi
+      '';
+      ExecStart = "${pkgs.qemu}/bin/qemu-nbd --connect=/dev/nbd0 /etc/home-assistant.qcow2";
       ExecStartPost = "mount /dev/nbd0p1 /etc/homeassistant";
-      ExecStop = "umount /etc/homeassistant";
-      ExecStop = "${pkgs.qemu}/bin/qemu-nbd --disconnect /dev/nbd0";
+      ExecStop = ''
+        umount /etc/homeassistant";
+        ExecStop = "${pkgs.qemu}/bin/qemu-nbd --disconnect /dev/nbd0
+      '';
     };
   };
 
