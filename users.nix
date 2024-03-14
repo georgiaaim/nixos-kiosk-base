@@ -40,7 +40,7 @@ in
     users.users = {
       kioskadmin = {
         createHome = true;
-        extraGroups = ["wheel" "sudo"];
+        extraGroups = ["wheel" "sudo" "libvirt"];
         group = "users";
         home = "/home/kioskadmin";
         shell = "/run/current-system/sw/bin/zsh";
@@ -48,7 +48,6 @@ in
         isNormalUser = true;
         hashedPassword = "$y$j9T$5fxR9An0pF.rgp07lLJxY1$1T5TkKiVEE7scgxhy00D50zaGGJuarElu.U4X7nX9q7";
         openssh.authorizedKeys.keys = sshKeys;
-        extraGroups = ["libvirtd"];
       };
 
       kiosk = {
