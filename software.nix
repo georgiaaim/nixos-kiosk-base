@@ -12,7 +12,7 @@ let
 in
 {
   services.kioskAdmin.enable = true;
-  boot.extraModulePackages = with config.boot.kernelPackages; [ nbd ];
+  programs.nbd.enable = true;
   # Mount the qcow2 to /etc/homeassistant
   systemd.services.mount-home-assistant-qcow2 = {
     description = "Mount Home Assistant qcow2";
