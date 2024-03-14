@@ -32,7 +32,7 @@ in
     script = "${pkgs.mount}/bin/mount /dev/nbd0p1 /etc/homeassistant";
 
     preStop = ''
-      umount /etc/homeassistant
+      ${pkgs.umount}/bin/umount /etc/homeassistant
       ${pkgs.qemu}/bin/qemu-nbd --disconnect /dev/nbd0
     '';
 
