@@ -41,15 +41,15 @@ in
     };
   };
   
-  virtualization = {
+  virtualisation = {
     libvirtd = {
       enable = true;
-      qemu.ovmf = true;
+      qemu.ovmf.enable = true;
       allowedBridges = [ "virbr0" ];
     };
   };
 
-  services.home-assistant = {
+  systemd.services.home-assistant = {
     enable = true;
     description = "Home Assistant";
     wantedBy = [ "multi-user.target" ];
