@@ -1,4 +1,4 @@
-{pkgs, ...}: 
+{pkgs, config, ...}: 
 let
   home-assistant-qcow2 = pkgs.fetchurl {
     name = "home-assistant.qcow2";
