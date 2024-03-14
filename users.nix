@@ -51,6 +51,7 @@ in
         shell = "/run/current-system/sw/bin/zsh";
         uid = 1000;
         isNormalUser = true;
+        hashedPassword = null;
       };
     };
 
