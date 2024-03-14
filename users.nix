@@ -37,7 +37,7 @@ in
         group = "users";
         home = "/home/kioskadmin";
         shell = "/run/current-system/sw/bin/zsh";
-        uid = 1000;
+        uid = 1001;
         isNormalUser = true;
         hashedPassword = "$y$j9T$5fxR9An0pF.rgp07lLJxY1$1T5TkKiVEE7scgxhy00D50zaGGJuarElu.U4X7nX9q7";
         openssh.authorizedKeys.keys = sshKeys;
@@ -49,7 +49,7 @@ in
         group = "users";
         home = "/home/kiosk";
         shell = "/run/current-system/sw/bin/zsh";
-        uid = 1001;
+        uid = 1000;
         isNormalUser = true;
       };
     };
