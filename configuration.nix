@@ -6,19 +6,23 @@
   ];
 
   # Bootloader configuration for systemd-boot (UEFI systems)
-  # boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
+  boot.initrd.verbose = false;
 
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev"; # for EFI systems, set to your specific device, or use "nodev" for UEFI-only systems
-    efiSupport = true;
-    splashImage = ./ga-aim-logo-final-white.tga;
-    configurationLimit = 3;
-  };
+  boot.plymouth.enable = true;
 
-  boot.kernelParams = [ "splash" "quiet" ]; # Ensure a quiet boot
+  #boot.loader.grub = {
+  #  enable = true;
+  #  device = "nodev"; # for EFI systems, set to your specific device, or use "nodev" for UEFI-only systems
+  #  efiSupport = true;
+  #  splashImage = ./ga-aim-logo-final-white.tga;
+  #  configurationLimit = 3;
+  #};
+
+  boot.kernelParams = [ "splash" "quiet" "rd.systemd.show_status=false"]; # Ensure a quiet boot
+  consoleLogLevel = 0;
 
   # System-wide configurations
   networking.hostName = "nixos";
