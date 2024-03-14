@@ -19,7 +19,7 @@ in
 
     wantedBy = [ "multi-user.target" ];
 
-    after = [ "local-fs.target" ];
+    partOf = [ "local-fs.target" ];
 
     preStart = ''
       if [ ! -f /etc/home-assistant.qcow2 ]; then
@@ -38,6 +38,17 @@ in
 
     serviceConfig = {
       Type = "forking";
+    };
+  };
+
+  services.home-assistant = {
+    enable = true;
+    description = "Home Assistant";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "local-fs.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.qemu}/bin/qemu-system-x86_64 -drive file=/dev/nbd0,format=raw,if=virtio -m 2048 -vga virtio -display gtk -net nic,model=virtio -net user -soundhw hda -usb -device usb-tablet -rtc base=localtime,clock=host -boot
+      Restart = "always";
     };
   };
 
