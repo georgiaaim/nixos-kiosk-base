@@ -25,7 +25,7 @@ let
   firefoxKioskScript = pkgs.writeScriptBin "firefox-kiosk" ''
     #!/usr/bin/env bash
     xmonad &
-    sleep 2
+    sleep 15
     exec ${pkgs.firefox}/bin/firefox --kiosk http://localhost:8123
   '';
 in

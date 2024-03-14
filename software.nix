@@ -1,24 +1,21 @@
 {pkgs, ...}: 
+let
+  home-assistant-qcow2 = pkgs.fetchurl {
+    name = `home-assistant.qcow2`;
+    url = "https://github.com/home-assistant/operating-system/releases/download/12.1/haos_ova-12.1.qcow2.xz";
+    sha256 = pkgs.lib.fakeSha256;
+    postFetch = ''
+      cp $out src.xz
+      ${pkgs.xz}/bin/unxz src.xz --stdout > $out
+    '';
+  }
+in
 {
   services.kioskAdmin.enable = true;
 
-  services.home-assistant = {
-    enable = true;
-    extraComponents = [
-      # Components required to complete the onboarding
-      "esphome"
-      "met"
-      "radio_browser"
-    ];
-    config = {
-      # Includes dependencies for a basic setup
-     # https://www.home-assistant.io/integrations/default_config/
-      default_config = {};
-    };
-  };
-
   environment.systemPackages = with pkgs; [
     parted
+    unxz
     firefox
   ];
 
