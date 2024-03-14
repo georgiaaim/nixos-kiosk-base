@@ -22,7 +22,7 @@
   #};
 
   boot.kernelParams = [ "splash" "quiet" "rd.systemd.show_status=false"]; # Ensure a quiet boot
-  consoleLogLevel = 0;
+  boot.consoleLogLevel = 0;
 
   # System-wide configurations
   networking.hostName = "nixos";

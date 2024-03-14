@@ -70,6 +70,14 @@ in
       Restart = "always";
     };
   };
+
+  xdg.configFile."powerdevilrc".text = ''
+    [AC][SuspendAndShutdown]
+    AutoSuspendAction=0
+
+    [AC][Display]
+    TurnOffDisplayWhenIdle=false
+  '';
   
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
