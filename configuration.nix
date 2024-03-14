@@ -8,13 +8,13 @@
   # Bootloader configuration for systemd-boot (UEFI systems)
   # boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = 0;
 
   boot.loader.grub = {
     enable = true;
     device = "nodev"; # for EFI systems, set to your specific device, or use "nodev" for UEFI-only systems
     efiSupport = true;
-    splashImage = "./ga-aim-logo-final-white.tga";
-    timeout = 0; # Set timeout to 0 for an immediate boot
+    splashImage = ./ga-aim-logo-final-white.tga;
     configurationLimit = 3;
   };
 
