@@ -24,10 +24,10 @@ in
       if [ ! -f /etc/home-assistant.qcow2 ]; then
         cp ${home-assistant-qcow2} /etc/home-assistant.qcow2
       fi
+      ${pkgs.qemu}/bin/qemu-nbd --connect=/dev/nbd0 /etc/home-assistant.qcow2
     '';
 
     script = ''
-      ${pkgs.qemu}/bin/qemu-nbd --connect=/dev/nbd0 /etc/home-assistant.qcow2
       mount /dev/nbd0p1 /etc/homeassistant
     '';
 
