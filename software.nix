@@ -29,7 +29,7 @@ in
       ${pkgs.qemu}/bin/qemu-nbd --connect=/dev/nbd0 /etc/home-assistant.qcow2
     '';
 
-    script = "${pkgs.mount}/bin/mount /dev/nbd0p2 /etc/homeassistant";
+    script = "${pkgs.mount}/bin/mount /dev/nbd0p8 /etc/homeassistant";
 
     preStop = ''
       ${pkgs.umount}/bin/umount /etc/homeassistant
