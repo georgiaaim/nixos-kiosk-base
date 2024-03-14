@@ -54,6 +54,11 @@ in
       };
     };
 
+    environment.etc."xdg/kdeglobals".text = ''
+      [KDE Action Restrictions][$i]
+      action/switch_user=false
+    '';
+
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
     home-manager.users.kioskadmin = import ./kioskadmin-home.nix;
