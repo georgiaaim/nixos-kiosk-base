@@ -21,6 +21,11 @@ let
                builtins.readFile kioskAdminMarcusSSHKeys;
 
   sshKeys = builtins.filter (s: s != "") (lib.splitString "\n" allSSHKeys);
+
+  firefoxKioskScript = pkgs.writeScriptBin "firefox-kiosk" ''
+    #!/usr/bin/env bash
+    exec ${pkgs.firefox}/bin/firefox --kiosk http://localhost:8123
+  '';
 in
 {
   options = {
@@ -59,6 +64,14 @@ in
       [KDE Action Restrictions][$i]
       action/switch_user=false
     '';
+
+    services.xserver.desktopManager.session = [
+      {
+        name = "firefox-kiosk";
+        start = ${firefoxKioskScript}/bin/firefox-kiosk;
+      }
+    ];
+    services.xserver.desktopManager.defaultSession = "firefox-kiosk";
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
