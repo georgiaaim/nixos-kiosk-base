@@ -56,16 +56,18 @@ in
     # '';
   };
 
-  systemd.user.services = {
-    kiosk = {
-      description = "Kiosk";
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${startFirefoxKiosk}";
-        Restart = "always";
-      };
+  systemd.user.services.kiosk = {
+    Units = {
+      Description = "Kiosk";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${startFirefoxKiosk}";
+      Restart = "always";
     };
   };
   
@@ -83,11 +85,6 @@ in
   home.sessionVariables = {
     EDITOR = "nvim";
   };
-
-  home.file.".config/kioskrc".text = ''
-    [KDE Action Restrictions]
-    
-  '';
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
