@@ -12,7 +12,7 @@
   boot.initrd.verbose = false;
 
   boot.plymouth.enable = true;
-  boot.plymouth.theme = pkgs.plymouthThemes.glow;
+  boot.plymouth.theme = "spinner";
 
   #boot.loader.grub = {
   #  enable = true;
