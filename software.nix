@@ -26,7 +26,6 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableThemes = true;
   };
 
   networking.firewall.allowedTCPPorts = [ 8123 ];
