@@ -47,7 +47,18 @@ in
     wantedBy = [ "multi-user.target" ];
     after = [ "local-fs.target" ];
     serviceConfig = {
-      ExecStart = "${pkgs.qemu}/bin/qemu-system-x86_64 -drive file=/dev/nbd0,format=raw,if=virtio -m 2048 -vga virtio -display gtk -net nic,model=virtio -net user -soundhw hda -usb -device usb-tablet -rtc base=localtime,clock=host -boot
+      ExecStart = ''${pkgs.qemu}/bin/qemu-system-x86_64 
+        -name hass \
+        -m 2048 \
+        -smp cpus=2 \
+        -drive file=/dev/nbd0,format=raw,if=none,id=drive-sata0-0-0 \
+        -device ahci,id=ahci \
+        -device ide-drive,drive=drive-sata0-0-0,bus=ahci.0 \
+        -nodefaults \
+        -nographic \
+        -bios /usr/share/qemu/OVMF.fd \
+        -net nic -net user
+      '';
       Restart = "always";
     };
   };
