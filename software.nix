@@ -8,7 +8,7 @@
       # Components required to complete the onboarding
       "esphome"
       "met"
-     "radio_browser"
+      "radio_browser"
     ];
     config = {
       # Includes dependencies for a basic setup
@@ -21,6 +21,13 @@
     parted
     firefox
   ];
+
+  programs.neovim.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    enableThemes = true;
+  };
 
   networking.firewall.allowedTCPPorts = [ 8123 ];
 }

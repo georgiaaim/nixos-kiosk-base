@@ -59,13 +59,5 @@ in
     home-manager.users.kioskadmin = import ./kioskadmin-home.nix;
     home-manager.users.kiosk = import ./kiosk-home.nix;
 
-    programs.neovim.enable = true;
-    programs.zsh = {
-      enable = true;
-      ohMyZsh = {
-        enable = true;
-        plugins = [];
-      };
-    };
   };
 }

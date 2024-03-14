@@ -9,6 +9,19 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.loader.grub = {
+    enable = true;
+    version = 2;
+    device = "nodev"; # for EFI systems, set to your specific device, or use "nodev" for UEFI-only systems
+    efiSupport = true;
+    splashImage = /path/to/your/splash/image.tga;
+    timeout = 0; # Set timeout to 0 for an immediate boot
+    extraConfig = ''
+    # Custom GRUB configurations for a silent boot
+    set quiet=1
+    '';
+  };
+
   # System-wide configurations
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
