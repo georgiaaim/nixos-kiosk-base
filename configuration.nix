@@ -36,6 +36,8 @@
   system.stateVersion = "23.11";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  services.xserver.windowManager.xmonad.enable = true;
+
   # Desktop Environment and Display Manager
   services.xserver.enable = true;
   services.xserver.displayManager.sddm.enable = true;
