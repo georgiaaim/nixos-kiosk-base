@@ -37,7 +37,7 @@ in
     '';
 
     serviceConfig = {
-      Type = "oneshot";
+      Type = "forking";
     };
   };
 
