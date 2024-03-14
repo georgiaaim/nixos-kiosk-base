@@ -70,10 +70,10 @@ in
     services.xserver.desktopManager.session = [
       {
         name = "firefox-kiosk";
-        start = ${firefoxKioskScript}/bin/firefox-kiosk;
+        start = "${firefoxKioskScript}/bin/firefox-kiosk";
       }
     ];
-    services.xserver.desktopManager.defaultSession = "firefox-kiosk";
+    services.xserver.displayManager.defaultSession = "firefox-kiosk";
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;

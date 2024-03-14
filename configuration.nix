@@ -45,7 +45,7 @@
 
   services.xserver.displayManager.autoLogin = {
     enable = true;
-    user = kiosk;
+    user = "kiosk";
   };
 
   services.xserver.desktopManager.plasma6.enable = true;
