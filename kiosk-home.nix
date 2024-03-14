@@ -78,6 +78,11 @@ in
     [AC][Display]
     TurnOffDisplayWhenIdle=false
   '';
+
+  xdg.configFile."kioskrc".text = ''
+    [KDE Action Restrictions]
+    action/switch_user=false
+  '';
   
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
