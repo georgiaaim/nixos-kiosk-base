@@ -40,6 +40,14 @@ in
       Type = "forking";
     };
   };
+  
+  virtualization = {
+    libvirtd = {
+      enable = true;
+      qemu.ovmf = true;
+      allowedBridges = [ "virbr0" ];
+    };
+  };
 
   services.home-assistant = {
     enable = true;
@@ -65,7 +73,7 @@ in
 
   environment.systemPackages = with pkgs; [
     parted
-    qemu
+    virt-manager
     xz
     firefox
   ];

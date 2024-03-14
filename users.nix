@@ -48,6 +48,7 @@ in
         isNormalUser = true;
         hashedPassword = "$y$j9T$5fxR9An0pF.rgp07lLJxY1$1T5TkKiVEE7scgxhy00D50zaGGJuarElu.U4X7nX9q7";
         openssh.authorizedKeys.keys = sshKeys;
+        extraGroups = ["libvirtd"];
       };
 
       kiosk = {
