@@ -12,6 +12,7 @@ let
 in
 {
   services.kioskAdmin.enable = true;
+  boot.extraModulePackages = with config.boot.kernelPackages; [ nbd ];
   # Mount the qcow2 to /etc/homeassistant
   systemd.services.mount-home-assistant-qcow2 = {
     description = "Mount Home Assistant qcow2";
@@ -21,7 +22,6 @@ in
     after = [ "local-fs.target" ];
 
     preStart = ''
-      modprobe nbd
       if [ ! -f /etc/home-assistant.qcow2 ]; then
         cp ${home-assistant-qcow2} /etc/home-assistant.qcow2
       fi
