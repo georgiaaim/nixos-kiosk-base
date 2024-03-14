@@ -56,6 +56,19 @@ in
     # '';
   };
 
+  systemd.user.services = {
+    kiosk = {
+      description = "Kiosk";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${startFirefoxKiosk}";
+        Restart = "always";
+      };
+    };
+  };
+  
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
   # Manager then you have to manually source 'hm-session-vars.sh' located at

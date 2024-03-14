@@ -5,6 +5,10 @@
     ./hardware-configuration.nix
   ];
 
+  environment.systemPackages = [
+    pkgs.adi1090x-plymouth-themes
+  ];
+
   # Bootloader configuration for systemd-boot (UEFI systems)
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -14,13 +18,18 @@
     version = 2;
     device = "nodev"; # for EFI systems, set to your specific device, or use "nodev" for UEFI-only systems
     efiSupport = true;
-    splashImage = /path/to/your/splash/image.tga;
+    splashImage = "./ga-aim-logo-final-white.tga";
     timeout = 0; # Set timeout to 0 for an immediate boot
     extraConfig = ''
     # Custom GRUB configurations for a silent boot
     set quiet=1
     '';
   };
+
+  # Enable Plymouth for a custom boot screen
+  services.plymouth.enable = true;
+  services.plymouth.theme = "circle"; # Use your desired theme
+  boot.kernelParams = [ "splash" "quiet" ]; # Ensure a quiet boot
 
   # System-wide configurations
   networking.hostName = "nixos";
