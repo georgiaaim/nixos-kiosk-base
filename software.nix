@@ -21,6 +21,7 @@ in
     after = [ "local-fs.target" ];
 
     preStart = ''
+      modprobe nbd
       if [ ! -f /etc/home-assistant.qcow2 ]; then
         cp ${home-assistant-qcow2} /etc/home-assistant.qcow2
       fi
