@@ -1,9 +1,9 @@
 {pkgs, ...}: 
 let
   home-assistant-qcow2 = pkgs.fetchurl {
-    name = `home-assistant.qcow2`;
+    name = "home-assistant.qcow2";
     url = "https://github.com/home-assistant/operating-system/releases/download/12.1/haos_ova-12.1.qcow2.xz";
-    sha256 = pkgs.lib.fakeSha256;
+    sha256 = "1rrhrzp5y219phd4iwj2ak2fvnrxdgjx7lszkp7pll97104fybff";
     postFetch = ''
       cp $out src.xz
       ${pkgs.xz}/bin/unxz src.xz --stdout > $out
@@ -12,10 +12,24 @@ let
 in
 {
   services.kioskAdmin.enable = true;
+  # Mount the qcow2 to /etc/homeassistant
+  systemd.services.mount-home-assistant-qcow2 = {
+    description = "Mount Home Assistant qcow2";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "local-fs.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.qemu}/bin/qemu-nbd --connect=/dev/nbd0 ${home-assistant-qcow2}";
+      ExecStartPost = "mount /dev/nbd0p1 /etc/homeassistant";
+      ExecStop = "umount /etc/homeassistant";
+      ExecStop = "${pkgs.qemu}/bin/qemu-nbd --disconnect /dev/nbd0";
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     parted
-    unxz
+    qemu
+    xz
     firefox
   ];
 
