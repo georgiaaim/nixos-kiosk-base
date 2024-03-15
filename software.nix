@@ -51,14 +51,15 @@ in
   virtualisation = {
     libvirtd = {
       enable = true;
+      nss.enable = true;
       qemu.ovmf.enable = true;
       allowedBridges = [ "virbr0" ];
     };
   };
 
   system.activationScripts.virt-install-hass = {
-    text = "${virtInstallScript}/bin/virt-install-hass";
-    deps = [ systemd.services.mount-home-assistant-qcow2 ]; # Ensure it runs after network is up if needed
+    texr = "${virtInstallScript}/bin/virt-install-hass";
+    deps = [ fs.target" ]; # Ensure it runs after network is up if needed
   };
 
   #systemd.services.home-assistant = {
