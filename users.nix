@@ -26,7 +26,7 @@ let
     #!/usr/bin/env bash
     xmonad &
     sleep 15
-    exec ${pkgs.firefox}/bin/firefox --kiosk http://localhost:8123
+    exec ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant:8123
   '';
 in
 {

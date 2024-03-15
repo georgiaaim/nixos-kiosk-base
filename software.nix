@@ -12,41 +12,14 @@ let
   
   virtInstallScript = pkgs.writeShellScriptBin "virt-install-hass" ''
     # Check if VM already exists, and other pre-conditions
-    if ! virsh list --all | grep -q hass; then
-      virt-install --name hass --description "Home Assistant OS" --os-variant=generic --ram=2048 --vcpus=2 --disk /etc/home-assistant.qcow2,bus=sata --import --graphics none --boot uefi
+    ${pkgs.libvirt}/bin/virsh net-start default
+    if ! ${pkgs.libvirt}/bin/virsh list --all | grep -q hass; then
+      ${pkgs.virt-manager}/bin/virt-install --name hass --description "Home Assistant OS" --os-variant=generic --ram=2048 --vcpus=2 --disk /etc/home-assistant.qcow2,bus=sata --import --graphics none --boot uefi
     fi
   '';
 in
 {
   services.kioskAdmin.enable = true;
-  programs.nbd.enable = true;
-  # Mount the qcow2 to /etc/homeassistant
-  systemd.services.mount-home-assistant-qcow2 = {
-    description = "Mount Home Assistant qcow2";
-
-    wantedBy = [ "multi-user.target" ];
-
-    partOf = [ "local-fs.target" ];
-
-    preStart = ''
-      if [ ! -f /etc/home-assistant.qcow2 ]; then
-        cp ${home-assistant-qcow2} /etc/home-assistant.qcow2
-      fi
-      mkdir -p /etc/homeassistant
-      ${pkgs.qemu}/bin/qemu-nbd --connect=/dev/nbd0 /etc/home-assistant.qcow2
-    '';
-
-    script = "${pkgs.mount}/bin/mount /dev/nbd0p8 /etc/homeassistant";
-
-    preStop = ''
-      ${pkgs.umount}/bin/umount /etc/homeassistant
-      ${pkgs.qemu}/bin/qemu-nbd --disconnect /dev/nbd0
-    '';
-
-    serviceConfig = {
-      Type = "forking";
-    };
-  };
   
   virtualisation = {
     libvirtd = {
@@ -57,9 +30,16 @@ in
     };
   };
 
+  system.activationScripts.hass-qcow2 = {
+    text = ''
+      if [ ! -f /etc/home-assistant.qcow2 ]; then
+        cp ${home-assistant-qcow2} /etc/home-assistant.qcow2
+      fi
+    '';
+  };
+
   system.activationScripts.virt-install-hass = {
-    texr = "${virtInstallScript}/bin/virt-install-hass";
-    deps = [ fs.target" ]; # Ensure it runs after network is up if needed
+    text = "${virtInstallScript}/bin/virt-install-hass";
   };
 
   #systemd.services.home-assistant = {
