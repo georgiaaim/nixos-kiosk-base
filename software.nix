@@ -15,6 +15,8 @@ let
     ${pkgs.libvirt}/bin/virsh net-start default
     if ! ${pkgs.libvirt}/bin/virsh list --all | grep -q hass; then
       ${pkgs.virt-manager}/bin/virt-install --name hass --description "Home Assistant OS" --os-variant=generic --ram=2048 --vcpus=2 --disk /etc/home-assistant.qcow2,bus=sata --import --graphics none --boot uefi
+    else
+      ${pkgs.libvirt}/bin/virsh start hass
     fi
   '';
 in
