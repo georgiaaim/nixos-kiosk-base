@@ -24,6 +24,7 @@ in
   virtualisation = {
     libvirtd = {
       enable = true;
+      nss.enable = true;
       qemu.ovmf.enable = true;
       allowedBridges = [ "virbr0" ];
     };

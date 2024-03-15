@@ -1,10 +1,4 @@
 { config, pkgs, ... }:
-let 
-  startFirefoxKiosk = pkgs.writeShellScriptBin "start-firefox-kiosk" ''
-    #!/usr/bin/env bash
-    ${pkgs.firefox}/bin/firefox --kiosk http://localhost:8123
-  '';
-in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -54,21 +48,6 @@ in
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  };
-
-  systemd.user.services.kiosk = {
-    Units = {
-      Description = "Kiosk";
-    };
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      Type = "simple";
-      ExecStart = "${startFirefoxKiosk}";
-      Restart = "always";
-    };
   };
 
   xdg.configFile."powerdevilrc".text = ''
