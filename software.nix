@@ -58,7 +58,7 @@ in
 
   system.activationScripts.virt-install-hass = {
     text = "${virtInstallScript}/bin/virt-install-hass";
-    deps = [ "local-fs.target" ]; # Ensure it runs after network is up if needed
+    deps = [ systemd.services.mount-home-assistant-qcow2 ]; # Ensure it runs after network is up if needed
   };
 
   #systemd.services.home-assistant = {
