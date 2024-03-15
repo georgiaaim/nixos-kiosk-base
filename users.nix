@@ -24,8 +24,8 @@ let
 
   firefoxKioskScript = pkgs.writeScriptBin "firefox-kiosk" ''
     #!/usr/bin/env bash
+    sleep 5
     xmonad &
-    sleep 15
     exec ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant:8123
   '';
 in
