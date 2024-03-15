@@ -11,12 +11,13 @@ let
   };
   
   virtInstallScript = pkgs.writeShellScriptBin "virt-install-hass" ''
+    # Check if network is running
+    ${pkgs.libvirt}/bin/virsh net-list | grep -q default || \
+      ${pkgs.libvirt}/bin/virsh net-start default
     # Check if VM already exists, and other pre-conditions
-    ${pkgs.libvirt}/bin/virsh net-start default
     if ! ${pkgs.libvirt}/bin/virsh list --all | grep -q hass; then
       ${pkgs.virt-manager}/bin/virt-install --name hass --description "Home Assistant OS" --os-variant=generic --ram=2048 --vcpus=2 --disk /etc/home-assistant.qcow2,bus=sata --import --graphics none --boot uefi
-    else
-      ${pkgs.libvirt}/bin/virsh start hass
+      ${pkgs.libvirt}/bin/virsh autostart hass
     fi
   '';
 in
