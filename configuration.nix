@@ -22,6 +22,8 @@
   boot.kernelParams = [ "splash" "quiet" "rd.systemd.show_status=false"]; # Ensure a quiet boot
   boot.consoleLogLevel = 0;
 
+  boot.plymouth.enable = true;
+
   # System-wide configurations
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
