@@ -10,6 +10,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
   boot.initrd.verbose = false;
+  boot.initrd.systemd.enable = true;
 
   boot.loader.grub = {
     enable = true;
@@ -19,8 +20,10 @@
     configurationLimit = 3;
   };
 
-  boot.kernelParams = [ "splash" "quiet" "rd.systemd.show_status=false"]; # Ensure a quiet boot
+  boot.kernelParams = [ "quiet" "rd.systemd.show_status=false"]; # Ensure a quiet boot
   boot.consoleLogLevel = 0;
+
+  boot.plymouth.enable = true;
 
   # System-wide configurations
   networking.hostName = "nixos";
@@ -46,6 +49,7 @@
   services.xserver.enable = true;
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.displayManager.sddm.wayland.enable = true;
+  services.xserver.displayManager.job.preStart = "sleep 1";
 
   services.xserver.displayManager.autoLogin = {
     enable = true;
