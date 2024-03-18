@@ -22,7 +22,7 @@
   boot.plymouth.enable = true;
 
   # System-wide configurations
-  networking.hostName = lib.mkOptional "nixos";
+  networking.hostName = lib.mkOption "nixos";
   networking.networkmanager.enable = true;
 
   #networking.defaultGateway = "10.0.0.1";
