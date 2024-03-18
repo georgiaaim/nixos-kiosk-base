@@ -27,7 +27,7 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    (pkgs.nerdfonts.override { fonts = [ "meslo-lgs-nf" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -84,10 +84,29 @@
         startplasma-wayland
       fi
     '';
-    ohMyZsh = {
+    oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "z" "zsh-syntax-highlighting"];
+      enableAutosuggestions = true;
+      plugins = [ 
+        "git"
+        "z" 
+        { 
+          name = "powerlevel10k";
+          src = pkgs.zsh-powerlevel10k;
+          file = "powerlevel10k.zsh-theme";
+        }
+        {
+          name = "powerlevel10k-config";
+          src = ./.p10k.zsh;
+          file = ".p10k.zsh";
+        }
+      ];
+      theme = "powerlevel10k/powerlevel10k";
+      syntaxHighlighting = true;
     };
+  };
+
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
