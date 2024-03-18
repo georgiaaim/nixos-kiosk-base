@@ -22,7 +22,7 @@
   boot.plymouth.enable = true;
 
   # System-wide configurations
-  networking.hostName = "nixos";
+  networking.hostName = lib.mkOptional "nixos";
   networking.networkmanager.enable = true;
 
   #networking.defaultGateway = "10.0.0.1";
@@ -52,7 +52,7 @@
     user = "kiosk";
   };
 
-  services.xserver.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Enable CUPS for printing
   services.printing.enable = true;
