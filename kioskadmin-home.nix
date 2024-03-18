@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -27,7 +27,7 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    (pkgs.nerdfonts.override { fonts = [ "meslo-lgs-nf" ]; })
+    (pkgs.nerdfonts.override { fonts = [ "Meslo" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -40,16 +40,7 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
-
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+    ".p10k.zsh".source = ./p10k-config/.p10k.zsh;
   };
 
   xdg.configFile."powerdevilrc".text = ''
@@ -78,32 +69,22 @@
   programs.zsh = {
     enable = true;
     enableCompletion = false;
+    syntaxHighlighting.enable = true;
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ 
+        "git"
+        "z" 
+      ];
+    };
     initExtra = ''
       # if a base tty, `startplasma-wayland` to start plasma
       if [[ $TERM == "linux" ]]; then
         startplasma-wayland
       fi
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme;
+      source ~/.p10k.zsh
     '';
-    oh-my-zsh = {
-      enable = true;
-      enableAutosuggestions = true;
-      plugins = [ 
-        "git"
-        "z" 
-        { 
-          name = "powerlevel10k";
-          src = pkgs.zsh-powerlevel10k;
-          file = "powerlevel10k.zsh-theme";
-        }
-        {
-          name = "powerlevel10k-config";
-          src = ./.p10k.zsh;
-          file = ".p10k.zsh";
-        }
-      ];
-      theme = "powerlevel10k/powerlevel10k";
-      syntaxHighlighting = true;
-    };
   };
 
 
