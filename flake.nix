@@ -1,5 +1,5 @@
 {
-  description = "A simple NixOS flake for ZimaBoard";
+  description = "Base UGA Module Factory Kiosk Configuration for ZimaBoard";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -8,9 +8,8 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
+    nixosModules.baseEnvironment = {
+      imports = [
         home-manager.nixosModules.home-manager 
         ./configuration.nix
         ./users.nix

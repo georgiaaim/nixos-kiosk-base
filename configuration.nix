@@ -1,9 +1,5 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
 
   # Bootloader configuration for systemd-boot (UEFI systems)
   #boot.loader.systemd-boot.enable = true;
