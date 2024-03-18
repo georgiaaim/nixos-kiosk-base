@@ -15,6 +15,7 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
@@ -73,6 +74,20 @@
   home.sessionVariables = {
     EDITOR = "nvim";
   };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = false;
+    initExtra = ''
+      # if a base tty, `startplasma-wayland` to start plasma
+      if [[ $TERM == "linux" ]]; then
+        startplasma-wayland
+      fi
+    '';
+    ohMyZsh = {
+      enable = true;
+      plugins = [ "git" "z" "zsh-syntax-highlighting"];
+    };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
