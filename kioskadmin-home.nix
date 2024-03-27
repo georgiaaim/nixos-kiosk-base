@@ -41,6 +41,7 @@
   # plain files is through 'home.file'.
   home.file = {
     ".p10k.zsh".source = ./p10k-config/.p10k.zsh;
+    "backup.tar".source = ./HA_Vignette_Backup.tar;
   };
 
   xdg.configFile."powerdevilrc".text = ''
