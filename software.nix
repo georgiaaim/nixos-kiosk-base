@@ -41,8 +41,18 @@ in
     '';
   };
 
-  system.activationScripts.virt-install-hass = {
-    text = "${virtInstallScript}/bin/virt-install-hass";
+  systemd.services.virt-install-hass = {
+    enable = true;
+    description = "Home Assistant";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "local-fs.target" ];
+    unitConfig = {
+      Type = "oneshot";
+      Requires = [ "libvirtd.service" ];
+    };
+    serviceConfig = {
+      ExecStart = "${virtInstallScript}/bin/virt-install-hass";
+    };
   };
 
   #systemd.services.home-assistant = {
