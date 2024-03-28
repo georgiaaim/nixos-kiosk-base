@@ -23,9 +23,6 @@ let
 in
 {
   services.kioskAdmin.enable = true;
-  services.unifi.enable = true;
-  services.unifi.openFirewall = true;
-  services.unifi.mongodbPackage = pkgs.ferretdb;
   
   virtualisation = {
     libvirtd = {
@@ -34,6 +31,17 @@ in
       qemu.ovmf.enable = true;
       allowedBridges = [ "virbr0" ];
     };
+    docker.enable = true;
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        unifi = {
+          image = "jacobalberty/unifi:latest";
+          ports = [ "3478:3478/udp" "10001:10001/udp" "8080:8080" "8443:8443" "1900:1900/udp" "6789:6789" "5514:5514/udp" "8843:8843" "8880:8880" "6783:6783" "6784:6784" "8883:8883" "3478:3478" "8081:8081" "8444:8444" "7443:7443" "7445:7445" "8888:8888" "27117:27117" ];
+        };
+      };
+    };
+
   };
 
   system.activationScripts.hass-qcow2 = {
