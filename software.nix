@@ -23,7 +23,18 @@ let
 in
 {
   services.kioskAdmin.enable = true;
-  
+
+  system.activationScripts.create-unifi-dir = {
+    text = ''
+      if [ ! -d /etc/unifi ]; then
+        mkdir /etc/unifi
+        mkdir /etc/unifi/data
+        mkdir /etc/unifi/logs
+        chown -R root:root /etc/unifi
+      fi
+    '';
+  };
+
   virtualisation = {
     libvirtd = {
       enable = true;
