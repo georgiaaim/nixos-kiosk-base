@@ -55,16 +55,19 @@
   services.dnsmasq = {
     enable = true;
     settings = {
-      interface="lan";
+      server = [ "1.1.1.1" "8.8.8.8" ];
+      no-resolv = true;
+      domain-needed = true;
+      except-interface="wan";
       except-interface="lo";
 
-      dhcp-range=[ "10.0.0.2,10.0.0.254,255.255.255.0" ];
-      dhcp-option= [ 
-        "option:router,10.0.0.1"
-        "option:dns-server,1.1.1.1"
-        "option:broadcast-address,10.0.0.255"
-        "option:subnet-mask,255.255.255.0"
-      ];
+      dhcp-range=[ "lan,10.0.0.2,10.0.0.254,24h" ];
+      interface="lan";
+      dhcp-host = "10.0.0.1";
+
+      local = "/lan/";
+      domain = "lan";
+      expand-hosts = true;
     };
   };
 
