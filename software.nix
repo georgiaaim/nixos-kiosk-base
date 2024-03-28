@@ -25,6 +25,7 @@ in
   services.kioskAdmin.enable = true;
   services.unifi.enable = true;
   services.unifi.openFirewall = true;
+  services.unifi.mongodbPackage = pkgs.ferretdb;
   
   virtualisation = {
     libvirtd = {
