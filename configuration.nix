@@ -45,7 +45,7 @@
     enable = true;
     settings = {
       server = [ "1.1.1.1" "8.8.8.8" ];
-      interfaces = [ "enp3s0" ];
+      interface = [ "enp3s0" ];
       range = "10.0.0.2,10.0.0.253,12h";
     };
   };
