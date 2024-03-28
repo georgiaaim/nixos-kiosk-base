@@ -15,6 +15,10 @@
     splashImage = ./ga-aim-logo-final-white.tga;
     configurationLimit = 3;
   };
+  
+  boot.kernel.sysctl = {
+    net.ipv4.conf.all.forwarding = true;
+  }; 
 
   boot.kernelParams = [ "quiet" "rd.systemd.show_status=false"]; # Ensure a quiet boot
   boot.consoleLogLevel = 0;
@@ -24,6 +28,44 @@
   # System-wide configurations
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
+
+  networking = {
+    vlans = {
+      wan = {
+        id = 10;
+        interface = "enp2s0";
+      };
+      lan = {
+        id = 20;
+        interface = "enp3s0";
+      };
+    };
+    interfaces = {
+      enp2s0.useDHCP = true;  
+      enp3s0.useDHCP = false;
+      lan = {
+        ipv4.addresses = [ {
+          address = "10.0.0.1";
+          prefixLength = 24;
+        } ];
+      };
+    };
+  };
+
+  services.dhcpd4 = {
+    enable = true;
+    interfaces = [ "lan" ];
+    extraConfig = ''
+      option domain-name-servers 1.1.1.1;
+      option subnet-mask 255.255.255.0;
+      subnet 10.0.0.0 netmask 255.255.255.0 {
+        option broadcast-address 10.0.0.255;
+        option routers 10.0.0.1;
+        interface lan;
+        range 10.0.0.2 10.0.0.253;
+      }
+    '';
+  };
 
   #networking.defaultGateway = "10.0.0.1";
   #networking.bridges.br0.interfaces = [ "enp2s0" ];

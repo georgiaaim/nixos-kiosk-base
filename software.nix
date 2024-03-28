@@ -23,6 +23,8 @@ let
 in
 {
   services.kioskAdmin.enable = true;
+  services.unifi.enable = true;
+  services.unifi.openFirewall = true;
   
   virtualisation = {
     libvirtd = {
@@ -79,6 +81,7 @@ in
 
   environment.systemPackages = with pkgs; [
     parted
+    git
     virt-manager
     xz
     firefox
