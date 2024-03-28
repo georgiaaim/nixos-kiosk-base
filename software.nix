@@ -48,8 +48,12 @@ in
       containers = {
         unifi = {
           image = "jacobalberty/unifi:latest";
+          ports = [ 
+            "8080:8080/tcp"
+            "8443:8443/tcp"
+            "10.0.0.1:3478:3478/udp"
+          ];
           volumes = [ "/etc/unifi:/unifi" ];
-          extraOptions = [ "--net=host" ];
         };
       };
     };
