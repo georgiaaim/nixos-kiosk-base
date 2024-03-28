@@ -25,43 +25,33 @@
 
   boot.plymouth.enable = true;
 
-  #networking = {
-  #  useDHCP = false;
-  #  interfaces = {
-  #    enp2s0 = {
-  #      useDHCP = true;
-  #    };
-  #    enp3s0 = {
-  #      useDHCP = false;
-  #      addresses = [ {
-  #        address = "10.0.0.1";
-  #        prefixLength = 24;
-  #      } ];
-  #    };
-  #  };
-  #};
-
-  systemd.network.enable = true;
-  systemd.network.networks = {
-    enp2s0 = {
-      enable = true;
-      dhcp4 = true;
-    };
-    enp3s0 = {
-      networkConfig = {
-        Address = "10.0.0.1/24";
-        DHCPServer = true;
-        IPMasquerade="ipv4";
+  networking = {
+    useDHCP = false;
+    interfaces = {
+      enp2s0 = {
+        useDHCP = true;
       };
-      dhcpServerConfig = {
-        EmitDNS = false;
+      enp3s0 = {
+        useDHCP = false;
+        addresses = [ {
+          address = "10.0.0.1";
+          prefixLength = 24;
+        } ];
       };
-      enable = true;
-      dhcp4 = false;
     };
   };
 
-  #networking.defaultGateway = "10.0.0.1";
+  services.dnsmasq = {
+    enable = true;
+    settings = {
+      server = [ "1.1.1.1" "8.8.8.8" ];
+      interfaces = [ "enp3s0" ];
+      range = "10.0.0.2,10.0.0.253,12h";
+    };
+  };
+
+  #systemd.network.enable = true;
+   #networking.defaultGateway = "10.0.0.1";
   #networking.bridges.br0.interfaces = [ "enp2s0" ];
   #networking.interfaces.br0 = {
   #  ipv4.addresses = [ { address = "10.0.0.5"; prefixLength = 24; } ];
