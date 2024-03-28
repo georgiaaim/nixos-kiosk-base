@@ -52,18 +52,19 @@
     };
   };
 
-  services.dhcpd4 = {
+  services.dnsmasq = {
     enable = true;
     interfaces = [ "lan" ];
-    extraConfig = ''
-      option domain-name-servers 1.1.1.1;
-      option subnet-mask 255.255.255.0;
-      subnet 10.0.0.0 netmask 255.255.255.0 {
-        option broadcast-address 10.0.0.255;
-        option routers 10.0.0.1;
-        interface lan;
-        range 10.0.0.2 10.0.0.253;
-      }
+    settings = ''
+      interface=lan
+      except-interface=lo
+      log-dhcp
+
+      dhcp-range=10.0.0.2,10.0.0.254,255.255.255.0,12h
+      dhcp-option=option:router,10.0.0.1
+      dhcp-option=option:dns-server,1.1.1.1
+      dhcp-option=option:broadcast-address,10.0.0.255
+      dhcp-option=option:subnet-mask,255.255.255.0
     '';
   };
 
