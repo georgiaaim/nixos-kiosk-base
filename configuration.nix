@@ -25,9 +25,23 @@
 
   boot.plymouth.enable = true;
 
-  # System-wide configurations
-  networking.hostName = "nixos";
+  #networking = {
+  #  useDHCP = false;
+  #  interfaces = {
+  #    enp2s0 = {
+  #      useDHCP = true;
+  #    };
+  #    enp3s0 = {
+  #      useDHCP = false;
+  #      addresses = [ {
+  #        address = "10.0.0.1";
+  #        prefixLength = 24;
+  #      } ];
+  #    };
+  #  };
+  #};
 
+  systemd.network.enable = true;
   systemd.network.networks = {
     enp2s0 = {
       enable = true;
