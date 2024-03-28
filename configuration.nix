@@ -54,7 +54,6 @@
 
   services.dnsmasq = {
     enable = true;
-    interfaces = [ "lan" ];
     settings = ''
       interface=lan
       except-interface=lo
