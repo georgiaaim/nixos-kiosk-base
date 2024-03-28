@@ -55,8 +55,8 @@
   services.dnsmasq = {
     enable = true;
     settings = {
-      interface=lan;
-      except-interface=lo;
+      interface="lan";
+      except-interface="lo";
 
       dhcp-range=[ "10.0.0.2,10.0.0.254,255.255.255.0" ];
       dhcp-option= [ 
