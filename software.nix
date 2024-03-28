@@ -37,7 +37,7 @@ in
       containers = {
         unifi = {
           image = "jacobalberty/unifi:latest";
-          networkMode = "host";
+          network_mode = "host";
         };
       };
     };
