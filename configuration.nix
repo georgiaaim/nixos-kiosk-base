@@ -58,8 +58,7 @@
       server = [ "1.1.1.1" "8.8.8.8" ];
       no-resolv = true;
       domain-needed = true;
-      except-interface="wan";
-      except-interface="lo";
+      except-interface= [ "wan" "lo" ];
 
       dhcp-range=[ "lan,10.0.0.2,10.0.0.254,24h" ];
       interface="lan";
