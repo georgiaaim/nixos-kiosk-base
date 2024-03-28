@@ -37,11 +37,11 @@ in
       containers = {
         unifi = {
           image = "jacobalberty/unifi:latest";
+          volumes = [ "/etc/unifi:/unifi" ];
           extraOptions = [ "--net=host" ];
         };
       };
     };
-
   };
 
   system.activationScripts.hass-qcow2 = {
