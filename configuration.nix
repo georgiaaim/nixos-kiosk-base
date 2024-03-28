@@ -34,19 +34,39 @@
       enp3s0 = {
         useDHCP = false;
         ipv4.addresses = [ {
-          address = "10.0.0.1";
+          address = "192.168.1.1";
           prefixLength = 24;
         } ];
       };
     };
   };
 
-  services.dnsmasq = {
+  services.kea.dhcp4 = {
     enable = true;
     settings = {
-      server = [ "1.1.1.1" "8.8.8.8" ];
-      interface = [ "enp3s0" ];
-      dhcp-range = "10.0.0.2,10.0.0.253,12h";
+      interfaces-config = {
+        interfaces = [
+          "enp3s0"
+        ];
+      };
+      lease-database = {
+        name = "/var/lib/kea/dhcp4.leases";
+        persist = true;
+        type = "memfile";
+      };
+      rebind-timer = 2000;
+      renew-timer = 1000;
+      subnet4 = [
+        {
+          pools = [
+            {
+              pool = "192.168.1.2 - 192.168.1.253";
+            }
+          ];
+          subnet = "192.168.1.0/24";
+        }
+      ];
+      valid-lifetime = 4000;
     };
   };
 
