@@ -27,46 +27,23 @@
 
   # System-wide configurations
   networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
 
-  networking = {
-    vlans = {
-      wan = {
-        id = 10;
-        interface = "enp2s0";
-      };
-      lan = {
-        id = 20;
-        interface = "enp3s0";
-      };
+  systemd.network.networks = {
+    enp2s0 = {
+      enable = true;
+      dhcp4 = true;
     };
-    interfaces = {
-      enp2s0.useDHCP = true;  
-      enp3s0.useDHCP = false;
-      lan = {
-        ipv4.addresses = [ {
-          address = "10.0.0.1";
-          prefixLength = 24;
-        } ];
+    enp3s0 = {
+      networkConfig = {
+        Address = "10.0.0.1/24";
+        DHCPServer = true;
+        IPMasquerade="ipv4";
       };
-    };
-  };
-
-  services.dnsmasq = {
-    enable = true;
-    settings = {
-      server = [ "1.1.1.1" "8.8.8.8" ];
-      no-resolv = true;
-      domain-needed = true;
-      except-interface= [ "wan" "lo" ];
-
-      dhcp-range=[ "lan,10.0.0.2,10.0.0.254,24h" ];
-      interface="lan";
-      dhcp-host = "10.0.0.1";
-
-      local = "/lan/";
-      domain = "lan";
-      expand-hosts = true;
+      dhcpServerConfig = {
+        EmitDNS = false;
+      };
+      enable = true;
+      dhcp4 = false;
     };
   };
 
