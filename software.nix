@@ -45,7 +45,7 @@ in
       containers = {
         unifi = {
           image = "jacobalberty/unifi:latest";
-          hostBridge = "br0";
+          extraOptions = [ "--net=host" ];
           volumes = [ "/etc/unifi:/unifi" ];
         };
       };
