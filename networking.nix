@@ -1,0 +1,64 @@
+{ config, pkgs, lib, ...}: 
+{
+  networking = {
+    useDHCP = false;
+
+    bridges = {
+      br0 = {
+        interfaces = [ "enp3s0" ];
+      };
+    };
+
+   interfaces = {
+      enp2s0 = {
+        useDHCP = true;
+      };
+
+      enp3s0 = {
+        useDHCP = false;
+        ipv4.addresses = [ {
+          address = "192.168.1.1";
+          prefixLength = 24;
+        } ];
+      };
+
+      br0 = {
+        useDHCP = true;
+      };
+    };
+  };
+
+  services.kea.dhcp4 = {
+    enable = true;
+    settings = {
+      interfaces-config = {
+        interfaces = [
+          "enp3s0"
+        ];
+      };
+      lease-database = {
+        name = "/var/lib/kea/dhcp4.leases";
+        persist = true;
+        type = "memfile";
+      };
+      rebind-timer = 2000;
+      renew-timer = 1000;
+      subnet4 = [
+        {
+          pools = [
+            {
+              pool = "192.168.1.2 - 192.168.1.253";
+            }
+          ];
+          subnet = "192.168.1.0/24";
+        }
+      ];
+      valid-lifetime = 4000;
+    };
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
+}

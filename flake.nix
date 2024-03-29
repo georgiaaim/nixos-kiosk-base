@@ -12,6 +12,7 @@
       imports = [
         home-manager.nixosModules.home-manager 
         ./configuration.nix
+        ./networking.nix
         ./users.nix
       	./software.nix
       ];
