@@ -15,15 +15,14 @@
       };
 
       enp3s0 = {
-        useDHCP = true;
-        #ipv4.addresses = [ {
-        #  address = "192.168.1.1";
-        #  prefixLength = 24;
-        #} ];
       };
 
       br0 = {
-        useDHCP = true;
+        useDHCP = false;
+        ipv4.addresses = [ {
+          address = "192.168.1.1";
+          prefixLength = 24;
+        } ];
       };
     };
   };
@@ -33,7 +32,7 @@
     settings = {
       interfaces-config = {
         interfaces = [
-          "enp3s0"
+          "br0"
         ];
       };
       lease-database = {
@@ -59,6 +58,8 @@
 
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
+    allowInterfaces = [ "br0" ];
+    publish.enable = true;
   };
 }
