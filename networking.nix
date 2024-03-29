@@ -6,7 +6,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [ 22 53 8080 8443 ];
-      allowedUDPPorts = [ 53 3478 5353 ];
+      allowedUDPPorts = [ 53 67 3478 5353 ];
     };
 
     nameservers = [ "192.168.1.1" "1.1.1.1" ];
