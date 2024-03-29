@@ -40,6 +40,8 @@
       interface = "br0";
       dhcp-range = [ "192.168.1.2,192.168.1.254,12h" ];
       domain-needed = false;
+      expand-hosts = true;
+      bogus-priv = true;
       server = [
         "192.168.1.1"
         "1.1.1.1"
