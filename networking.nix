@@ -9,6 +9,8 @@
       allowedUDPPorts = [ 53 3478 5353 ];
     };
 
+    nameservers = [ "192.168.1.1" "1.1.1.1" ];
+
     bridges = {
       br0 = {
         interfaces = [ "enp3s0" ];
@@ -31,34 +33,50 @@
     };
   };
 
-  services.kea.dhcp4 = {
+  services.dnsmasq = {
     enable = true;
+    alwaysKeepRunning = true;
     settings = {
-      interfaces-config = {
-        interfaces = [
-          "br0"
-        ];
-      };
-      lease-database = {
-        name = "/var/lib/kea/dhcp4.leases";
-        persist = true;
-        type = "memfile";
-      };
-      rebind-timer = 2000;
-      renew-timer = 1000;
-      subnet4 = [
-        {
-          pools = [
-            {
-              pool = "192.168.1.2 - 192.168.1.253";
-            }
-          ];
-          subnet = "192.168.1.0/24";
-        }
+      interface = "br0";
+      dhcp-range = [ "192.168.1.2,192.168.1.254,12h" ];
+      domain-needed = false;
+      server = [
+        "192.168.1.1"
+        "1.1.1.1"
       ];
-      valid-lifetime = 4000;
+      dhcp-leasefile="/var/lib/misc/dnsmasq.leases";
     };
+
   };
+
+  #services.kea.dhcp4 = {
+  #  enable = true;
+  #  settings = {
+  #    interfaces-config = {
+  #      interfaces = [
+  #        "br0"
+  #      ];
+  #    };
+  #    lease-database = {
+  #      name = "/var/lib/kea/dhcp4.leases";
+  #      persist = true;
+  #      type = "memfile";
+  #    };
+  #    rebind-timer = 2000;
+  #    renew-timer = 1000;
+  #    subnet4 = [
+  #      {
+  #        pools = [
+  #          {
+  #            pool = "192.168.1.2 - 192.168.1.253";
+  #          }
+  #        ];
+  #        subnet = "192.168.1.0/24";
+  #      }
+  #    ];
+  #    valid-lifetime = 4000;
+  #  };
+  #};
 
   services.avahi = {
     enable = true;
