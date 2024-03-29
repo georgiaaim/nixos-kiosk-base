@@ -15,6 +15,7 @@
       };
 
       enp3s0 = {
+        useDHCP = false;
       };
 
       br0 = {
