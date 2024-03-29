@@ -29,7 +29,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = true;
-  networking.firewall.allowedTCPPorts = [ 22 ];
   system.stateVersion = "23.11";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

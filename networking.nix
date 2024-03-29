@@ -3,6 +3,12 @@
   networking = {
     useDHCP = false;
 
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 22 8080 8443];
+      allowedUDPPorts = [ 3478 ];
+    };
+
     bridges = {
       br0 = {
         interfaces = [ "enp3s0" ];
