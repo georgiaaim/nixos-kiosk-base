@@ -7,6 +7,11 @@
       enable = true;
       allowedTCPPorts = [ 22 53 8080 8443 ];
       allowedUDPPorts = [ 53 67 3478 5353 ];
+      extraCommands = ''
+        iptables -t nat -A POSTROUTING -o enp2s0 -j MASQUERADE
+        iptables -A FORWARD -i enp2s0 -o br0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+        iptables -A FORWARD -i br0 -o enp2s0 -j ACCEPT
+      '';
     };
 
     nameservers = [ "192.168.1.1" "1.1.1.1" ];
