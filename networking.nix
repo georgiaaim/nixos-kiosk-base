@@ -5,13 +5,13 @@
 
     bridges = {
       br0 = {
-        interfaces = [ "enp3s0" ];
+        interfaces = [ "enp2s0" ];
       };
     };
 
    interfaces = {
       enp2s0 = {
-        useDHCP = true;
+        useDHCP = false;
       };
 
       enp3s0 = {
