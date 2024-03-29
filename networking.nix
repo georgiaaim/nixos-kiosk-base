@@ -5,8 +5,8 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 8080 8443];
-      allowedUDPPorts = [ 3478 ];
+      allowedTCPPorts = [ 22 53 8080 8443 ];
+      allowedUDPPorts = [ 53 3478 5353 ];
     };
 
     bridges = {
