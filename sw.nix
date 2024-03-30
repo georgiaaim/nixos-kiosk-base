@@ -97,14 +97,8 @@ in
     }
   ];
   services.xserver.displayManager.defaultSession = "firefox-kiosk";
-
-  # Desktop Environment and Display Manager
-  services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
   services.xserver.displayManager.job.preStart = "sleep 1";
   services.xserver.windowManager.xmonad.enable = true;
-  services.desktopManager.plasma6.enable = true;
 
   # Extra software packages to install
   environment.systemPackages = with pkgs; [

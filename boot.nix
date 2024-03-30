@@ -31,6 +31,12 @@
   system.stateVersion = "23.11";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  # Enable Wayland and SDDM for Plasma 6
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
   # Immediately open kiosk user on boot
   services.xserver.displayManager.autoLogin = {
     enable = true;
