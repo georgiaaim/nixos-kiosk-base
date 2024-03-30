@@ -1,11 +1,15 @@
 { config, pkgs, lib, ...}: 
 {
+  boot.kernel.sysctl = {
+    "net.ipv4.ip_forward" = 1;
+  }; 
+
   networking = {
     useDHCP = false;
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 53 8080 8443 ];
+      allowedTCPPorts = [ 22 53 8080 8123 8443 ];
       allowedUDPPorts = [ 53 67 3478 5353 ];
       extraCommands = ''
         iptables -t nat -A POSTROUTING -o enp2s0 -j MASQUERADE

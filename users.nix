@@ -1,4 +1,4 @@
-{config, lib, pkgs, nix, ...}:
+{config, lib, pkgs,  ...}:
 
 let
   kioskAdminHunterSSHKeys = builtins.fetchurl {
@@ -21,64 +21,40 @@ let
                builtins.readFile kioskAdminMarcusSSHKeys;
 
   sshKeys = builtins.filter (s: s != "") (lib.splitString "\n" allSSHKeys);
-
-  firefoxKioskScript = pkgs.writeScriptBin "firefox-kiosk" ''
-    #!/usr/bin/env bash
-    sleep 5
-    xmonad &
-    exec ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123
-  '';
 in
 {
-  options = {
-    services.kioskAdmin = {
-      enable = lib.mkEnableOption "kioskadmin user service";
+  users.users = {
+    kioskadmin = {
+      createHome = true;
+      extraGroups = ["wheel" "sudo" "libvirt"];
+      group = "users";
+      home = "/home/kioskadmin";
+      shell = "/run/current-system/sw/bin/zsh";
+      uid = 1001;
+      isNormalUser = true;
+      hashedPassword = "$y$j9T$5fxR9An0pF.rgp07lLJxY1$1T5TkKiVEE7scgxhy00D50zaGGJuarElu.U4X7nX9q7";
+      openssh.authorizedKeys.keys = sshKeys;
+    };
+
+    kiosk = {
+      createHome = true;
+      extraGroups = ["wheel"];
+      group = "users";
+      home = "/home/kiosk";
+      shell = "/run/current-system/sw/bin/zsh";
+      uid = 1000;
+      isNormalUser = true;
+      hashedPassword = "";
     };
   };
 
-  config = lib.mkIf config.services.kioskAdmin.enable {
-    users.users = {
-      kioskadmin = {
-        createHome = true;
-        extraGroups = ["wheel" "sudo" "libvirt"];
-        group = "users";
-        home = "/home/kioskadmin";
-        shell = "/run/current-system/sw/bin/zsh";
-        uid = 1001;
-        isNormalUser = true;
-        hashedPassword = "$y$j9T$5fxR9An0pF.rgp07lLJxY1$1T5TkKiVEE7scgxhy00D50zaGGJuarElu.U4X7nX9q7";
-        openssh.authorizedKeys.keys = sshKeys;
-      };
+  environment.etc."xdg/kdeglobals".text = ''
+    [KDE Action Restrictions][$i]
+    action/switch_user=false
+  '';
 
-      kiosk = {
-        createHome = true;
-        extraGroups = ["wheel"];
-        group = "users";
-        home = "/home/kiosk";
-        shell = "/run/current-system/sw/bin/zsh";
-        uid = 1000;
-        isNormalUser = true;
-        hashedPassword = "";
-      };
-    };
-
-    environment.etc."xdg/kdeglobals".text = ''
-      [KDE Action Restrictions][$i]
-      action/switch_user=false
-    '';
-
-    services.xserver.desktopManager.session = [
-      {
-        name = "firefox-kiosk";
-        start = "${firefoxKioskScript}/bin/firefox-kiosk";
-      }
-    ];
-    services.xserver.displayManager.defaultSession = "firefox-kiosk";
-
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-    home-manager.users.kioskadmin = import ./kioskadmin-home.nix;
-    home-manager.users.kiosk = import ./kiosk-home.nix;
-
-  };
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.kioskadmin = import ./kioskadmin-home.nix;
+  home-manager.users.kiosk = import ./kiosk-home.nix;
 }

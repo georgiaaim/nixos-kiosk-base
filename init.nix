@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-
   # Bootloader configuration for systemd-boot (UEFI systems)
-  #boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
   boot.initrd.verbose = false;
@@ -12,18 +10,15 @@
     enable = true;
     device = "nodev"; # for EFI systems, set to your specific device, or use "nodev" for UEFI-only systems
     efiSupport = true;
-    splashImage = ./ga-aim-logo-final-white.tga;
-    configurationLimit = 3;
+    splashImage = ./assets/ga-aim-logo-final-white.tga;
+    configurationLimit = 5;
   };
   
-  boot.kernel.sysctl = {
-    "net.ipv4.ip_forward" = 1;
-  }; 
-
   boot.kernelParams = [ "quiet" "rd.systemd.show_status=false"]; # Ensure a quiet boot
   boot.consoleLogLevel = 0;
 
   boot.plymouth.enable = true;
+  boot.plymouth.theme = pkgs.plymouthThemes.kde;
 
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";

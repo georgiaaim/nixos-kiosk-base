@@ -17,6 +17,13 @@ let
       ${pkgs.libvirt}/bin/virsh autostart hass
     fi
   '';
+
+  firefoxKioskScript = pkgs.writeScriptBin "firefox-kiosk" ''
+    #!/usr/bin/env bash
+    sleep 5
+    xmonad &
+    exec ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123
+  '';
 in
 {
   services.kioskAdmin.enable = true;
@@ -74,27 +81,13 @@ in
     };
   };
 
-  #systemd.services.home-assistant = {
-  #  enable = true;
-  #  description = "Home Assistant";
-  #  wantedBy = [ "multi-user.target" ];
-  #  after = [ "local-fs.target" ];
-  #  serviceConfig = {
-  #    ExecStart = ''${pkgs.qemu}/bin/qemu-system-x86_64 
-  #      -name hass \
-  #      -m 2048 \
-  #      -smp cpus=2 \
-  #      -drive file=/dev/nbd0,format=raw,if=none,id=drive-sata0-0-0 \
-  #      -device ahci,id=ahci \
-  #      -device ide-drive,drive=drive-sata0-0-0,bus=ahci.0 \
-  #      -nodefaults \
-  #      -nographic \
-  #      -bios /usr/share/qemu/OVMF.fd \
-  #      -net nic -net user
-  #    '';
-  #    Restart = "always";
-  #  };
-  #};
+  services.xserver.desktopManager.session = [
+    {
+      name = "firefox-kiosk";
+      start = "${firefoxKioskScript}/bin/firefox-kiosk";
+    }
+  ];
+  services.xserver.displayManager.defaultSession = "firefox-kiosk";
 
   environment.systemPackages = with pkgs; [
     parted
@@ -110,5 +103,4 @@ in
     enableCompletion = true;
   };
 
-  networking.firewall.allowedTCPPorts = [ 8123 ];
 }
