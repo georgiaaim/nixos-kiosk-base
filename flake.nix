@@ -12,9 +12,9 @@
       imports = [
         home-manager.nixosModules.home-manager 
         ./init.nix
-        ./networking.nix
-        ./users.nix
-      	./software.nix
+        ./net.nix
+        ./users
+      	./sw.nix
       ];
     };
   };

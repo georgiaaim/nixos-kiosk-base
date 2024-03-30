@@ -1,5 +1,6 @@
 {pkgs, config, ...}: 
 let
+  # Fetch the Home Assistant OS qcow2 image
   home-assistant-qcow2 = pkgs.fetchurl {
     name = "home-assistant.qcow2";
     url = "https://github.com/home-assistant/operating-system/releases/download/12.1/haos_ova-12.1.qcow2.xz";
@@ -10,6 +11,7 @@ let
     '';
   };
   
+  # Write a script to install the Home Assistant OS qcow2 image
   virtInstallScript = pkgs.writeShellScriptBin "virt-install-hass" ''
     # Check if VM already exists, and other pre-conditions
     if ! ${pkgs.libvirt}/bin/virsh list --all | grep -q hass; then
@@ -18,6 +20,7 @@ let
     fi
   '';
 
+  # Write a script to start Firefox in kiosk mode
   firefoxKioskScript = pkgs.writeScriptBin "firefox-kiosk" ''
     #!/usr/bin/env bash
     sleep 5
@@ -26,8 +29,7 @@ let
   '';
 in
 {
-  services.kioskAdmin.enable = true;
-
+  # Ensure the Unifi directories exist
   system.activationScripts.create-unifi-dir = {
     text = ''
       if [ ! -d /etc/unifi ]; then
@@ -40,6 +42,7 @@ in
   };
 
   virtualisation = {
+    # Enable libvirtd and Docker
     libvirtd = {
       enable = true;
       nss.enable = true;
@@ -47,9 +50,12 @@ in
       allowedBridges = [ "br0" ];
     };
     docker.enable = true;
+
+    # Define the Docker container(s)
     oci-containers = {
       backend = "docker";
       containers = {
+        # Unifi Controller Docker Container
         unifi = {
           image = "jacobalberty/unifi:latest";
           extraOptions = [ "--net=host" ];
@@ -59,6 +65,7 @@ in
     };
   };
 
+  # Ensure the Home Assistant OS qcow2 image is available in a writable location
   system.activationScripts.hass-qcow2 = {
     text = ''
       if [ ! -f /etc/home-assistant.qcow2 ]; then
@@ -67,6 +74,7 @@ in
     '';
   };
 
+  # Define the Home Assistant OS installation service
   systemd.services.virt-install-hass = {
     enable = true;
     description = "Home Assistant";
@@ -81,6 +89,7 @@ in
     };
   };
 
+  # Define the Firefox kiosk service
   services.xserver.desktopManager.session = [
     {
       name = "firefox-kiosk";
@@ -89,6 +98,15 @@ in
   ];
   services.xserver.displayManager.defaultSession = "firefox-kiosk";
 
+  # Desktop Environment and Display Manager
+  services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.xserver.displayManager.job.preStart = "sleep 1";
+  services.xserver.windowManager.xmonad.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+  # Extra software packages to install
   environment.systemPackages = with pkgs; [
     parted
     git
@@ -97,10 +115,13 @@ in
     firefox
   ];
 
+  # Enable the Neovim and Zsh programs
   programs.neovim.enable = true;
   programs.zsh = {
     enable = true;
     enableCompletion = true;
   };
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 }
