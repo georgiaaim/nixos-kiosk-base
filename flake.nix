@@ -11,7 +11,7 @@
     nixosModules.baseEnvironment = {
       imports = [
         home-manager.nixosModules.home-manager 
-        ./init.nix
+        ./boot.nix
         ./net.nix
         ./users
       	./sw.nix
