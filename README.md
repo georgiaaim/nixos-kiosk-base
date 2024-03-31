@@ -7,13 +7,13 @@ This repository houses the NixOS configuration flake for a kiosk system, optimiz
 The configuration is split across several files and directories to separate concerns and simplify management. Here's an overview:
 
 - **`flake.nix`**: The entry point of the flake, defining inputs such as Nixpkgs and Home-Manager, and outputs including the NixOS modules and packages.
-- **`boot.nix`**: Contains bootloader configurations, including settings for systemd-boot, GRUB, and various boot-time parameters.
+- **`boot.nix`**: Contains bootloader configurations, including settings for systemd, GRUB, and various boot-time parameters.
 - **`net.nix`**: Defines network configuration, including firewall rules, IP forwarding, DNS settings, and network interfaces.
-- **`users/` directory**: Houses user definitions and Home Manager configurations.
+- **`users/` directory**: Houses user definitions and general user configurations.
   - **`default.nix`**: Defines user accounts and points to Home Manager configurations for each.
   - **`kiosk-home.nix`**: Home Manager configuration for the kiosk user, setting up the user environment.
   - **`kioskadmin-home.nix`**: Home Manager configuration for the kiosk admin user, including administrative tools and settings.
-- **`sw.nix`**: Specifies the software environment, including Home Assistant, system packages, services like SSH, CUPS, and the display manager, and customization for the desktop environment.
+- **`sw.nix`**: Specifies the software environment, including Home Assistant, system packages, services like SSH, Docker containers, and customization for the desktop environment.
 
 ## Features
 
