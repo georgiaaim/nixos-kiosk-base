@@ -64,7 +64,7 @@
         "192.168.1.1"
         "1.1.1.1"
       ];
-      dhcp-leasefile="/var/lib/misc/dnsmasq.leases";
+      dhcp-leasefile="/var/lib/dnsmasq/dnsmasq.leases";
     };
 
   };
