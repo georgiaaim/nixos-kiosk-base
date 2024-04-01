@@ -9,10 +9,10 @@
     firewall = {
       enable = true;
       # SSH, DNS, MQTT, Unifi, Home Assistant, and Unifi respectively
-      allowedTCPPorts = [ 22 53 1883 8080 8123 8443 ];
+      allowedTCPPorts = [ 22 53 1883 6053 8080 8123 8443 50537 ];
 
       # DNS, DHCP, MQTT, Unifi, and mDNS respectively
-      allowedUDPPorts = [ 53 67 1883 3478 5353 ];
+      allowedUDPPorts = [ 53 67 1883 3478 5353 6053 50537 ];
 
       # Allow forwarding from LAN to WAN
       extraCommands = ''
