@@ -27,7 +27,6 @@
 
   # Boot pretty
   boot.plymouth.enable = true;
-  boot.plymouth.theme = pkgs.plymouthThemes.kde;
 
   # Set up locale
   time.timeZone = "America/New_York";
