@@ -55,6 +55,6 @@ in
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
-  home-manager.users.kioskadmin = import ./users/kioskadmin-home.nix;
-  home-manager.users.kiosk = import ./users/kiosk-home.nix;
+  home-manager.users.kioskadmin = import ./kioskadmin-home.nix;
+  home-manager.users.kiosk = import ./kiosk-home.nix;
 }

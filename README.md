@@ -14,6 +14,7 @@ The configuration is split across several files and directories to separate conc
   - **`kiosk-home.nix`**: Home Manager configuration for the kiosk user, setting up the user environment.
   - **`kioskadmin-home.nix`**: Home Manager configuration for the kiosk admin user, including administrative tools and settings.
 - **`sw.nix`**: Specifies the software environment, including Home Assistant, system packages, services like SSH, Docker containers, and customization for the desktop environment.
+- **`disks.nix`**: Drive configuration and mounting definitions.
 
 ## Features
 
