@@ -6,6 +6,7 @@
   }; 
 
   networking = {
+    useNetworkd = true;
     firewall = {
       enable = true;
       # SSH, DNS, MQTT, Unifi, Home Assistant, and Unifi respectively
@@ -66,16 +67,16 @@
       ];
       dhcp-leasefile="/var/lib/dnsmasq/dnsmasq.leases";
     };
-
   };
 
 
   # Allows local DNS resolution for bridge network
   #   e.g. `homeassistant.local`
-  services.avahi = {
+  services.resolved = {
     enable = true;
-    nssmdns4 = true;
-    allowInterfaces = [ "br0" ];
-    publish.enable = true;
+    dnssec = "true";
+    domains = [ "~." ];
+    fallbackDNS = [ "1.1.1.1#one.one.one.one" ];
+    dnsovertls = "true";
   };
 }
