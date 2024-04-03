@@ -19,14 +19,6 @@ let
       ${pkgs.libvirt}/bin/virsh autostart hass
     fi
   '';
-
-  # Write a script to start Firefox in kiosk mode
-  firefoxKioskScript = pkgs.writeScriptBin "firefox-kiosk" ''
-    #!/usr/bin/env bash
-    sleep 5
-    xmonad &
-    exec ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123
-  '';
 in
 {
   # Ensure the Unifi directories exist
@@ -88,17 +80,6 @@ in
       ExecStart = "${virtInstallScript}/bin/virt-install-hass";
     };
   };
-
-  # Define the Firefox kiosk service
-  services.xserver.desktopManager.session = [
-    {
-      name = "firefox-kiosk";
-      start = "${firefoxKioskScript}/bin/firefox-kiosk";
-    }
-  ];
-  services.xserver.displayManager.defaultSession = "firefox-kiosk";
-  services.xserver.displayManager.job.preStart = "sleep 1";
-  services.xserver.windowManager.xmonad.enable = true;
 
   # Extra software packages to install
   environment.systemPackages = with pkgs; [

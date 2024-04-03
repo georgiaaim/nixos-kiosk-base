@@ -38,7 +38,7 @@ in
 
     kiosk = {
       createHome = true;
-      extraGroups = ["wheel"];
+      extraGroups = ["wheel" "nopasswdlogin"];
       group = "users";
       home = "/home/kiosk";
       shell = "/run/current-system/sw/bin/zsh";
@@ -47,6 +47,8 @@ in
       hashedPassword = "";
     };
   };
+
+  security.pam.services.sddm.allowNullPassword = true;
 
   environment.etc."xdg/kdeglobals".text = ''
     [KDE Action Restrictions][$i]
