@@ -33,7 +33,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # Specify Nix specific options
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable Wayland and SDDM for Plasma 6
@@ -43,10 +43,10 @@
   services.desktopManager.plasma6.enable = true;
 
   # Immediately open kiosk user on boot
-  services.xserver.displayManager.autoLogin = {
-    enable = true;
-    user = "kiosk";
-  };
+  #services.xserver.displayManager.autoLogin = {
+  #  enable = true;
+  #  user = "kiosk";
+  #};
 
   # Enable SSH for remote access
   services.openssh.enable = true;
