@@ -17,8 +17,8 @@
     enable = true;
     device = "nodev"; # for EFI systems, set to your specific device, or use "nodev" for UEFI-only systems
     efiSupport = true;
-    gfxmode = "auto";
-    gfxpayload = "keep";
+    gfxmodeEfi = "auto";
+    gfxpayloadEfi = "keep";
     splashImage = ./assets/ga-aim-logo-final-white.tga;
     configurationLimit = 5;
   };
