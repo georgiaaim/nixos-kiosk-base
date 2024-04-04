@@ -74,10 +74,6 @@
   #   e.g. `homeassistant.local`
   services.resolved = {
     enable = true;
-    extraConfig = ''
-      [Resolve]
-      DNSStubListener=no
-    '';
     dnssec = "true";
     domains = [ "~." ];
     fallbackDns = [ "1.1.1.1#one.one.one.one" ];
