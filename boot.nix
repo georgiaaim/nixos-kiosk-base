@@ -25,9 +25,6 @@
   boot.kernelParams = [ "quiet" "rd.systemd.show_status=false"]; # Ensure a quiet boot
   boot.consoleLogLevel = 0;
 
-  # Boot pretty
-  boot.plymouth.enable = true;
-
   # Set up locale
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -36,16 +33,25 @@
   system.stateVersion = "24.05";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.displayManager.defaultSession = "gnome";
-
-  # Immediately open kiosk user on boot
-  services.xserver.displayManager.autoLogin = {
+  services.xserver = {
     enable = true;
-    user = "kiosk";
+    displayManager = {
+      gdm = {
+        enable = true;
+        wayland = true;
+        autoSuspend = false;
+      };
+      defaultSession = "gnome";
+      autoLogin = {
+        enable = true;
+        user = "kiosk";
+      };
+    };
+    desktopManager.gnome.enable = true;
   };
+
+  systemd.services."getty@tty1".enable = false;
+  systemd.services."autovt@tty1".enable = false;
 
   # Enable SSH for remote access
   services.openssh.enable = true;
