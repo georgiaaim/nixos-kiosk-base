@@ -36,17 +36,15 @@
   system.stateVersion = "24.05";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Enable Wayland and SDDM for Plasma 6
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
-  # Immediately open kiosk user on boot
-  #services.xserver.displayManager.autoLogin = {
-  #  enable = true;
-  #  user = "kiosk";
-  #};
+   Immediately open kiosk user on boot
+  services.xserver.displayManager.autoLogin = {
+    enable = true;
+    user = "kiosk";
+  };
 
   # Enable SSH for remote access
   services.openssh.enable = true;
