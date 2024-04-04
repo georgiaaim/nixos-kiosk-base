@@ -76,7 +76,7 @@
     enable = true;
     dnssec = "true";
     domains = [ "~." ];
-    fallbackDns = [ "1.1.1.1#one.one.one.one" ];
+    fallbackDNS = [ "1.1.1.1#one.one.one.one" ];
     dnsovertls = "true";
   };
 }
