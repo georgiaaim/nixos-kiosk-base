@@ -43,14 +43,6 @@
     ".p10k.zsh".source = ../assets/.p10k.zsh;
   };
 
-  xdg.configFile."powerdevilrc".text = ''
-    [AC][SuspendAndShutdown]
-    AutoSuspendAction=0
-
-    [AC][Display]
-    TurnOffDisplayWhenIdle=false
-  '';
-
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. If you don't want to manage your shell through Home
   # Manager then you have to manually source 'hm-session-vars.sh' located at
@@ -77,17 +69,7 @@
         "z" 
       ];
     };
-    initExtra = ''
-      # if a base tty, `startplasma-wayland` to start plasma
-      if [[ $TERM == "linux" ]]; then
-        startplasma-wayland
-      fi
-      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme;
-      source ~/.p10k.zsh
-    '';
   };
-
-
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

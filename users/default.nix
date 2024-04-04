@@ -48,12 +48,7 @@ in
     };
   };
 
-  security.pam.services.sddm.allowNullPassword = true;
-
-  environment.etc."xdg/kdeglobals".text = ''
-    [KDE Action Restrictions][$i]
-    action/switch_user=false
-  '';
+  security.pam.services.gdm.enableGnomeKeyring = true;
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
