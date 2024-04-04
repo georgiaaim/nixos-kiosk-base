@@ -6,6 +6,7 @@
   }; 
 
   networking = {
+    networkmanager.enable = false;
     firewall = {
       enable = true;
       # SSH, DNS, MQTT, Unifi, Home Assistant, and Unifi respectively
@@ -68,7 +69,6 @@
     };
 
   };
-
 
   # Allows local DNS resolution for bridge network
   #   e.g. `homeassistant.local`
