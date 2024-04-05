@@ -68,6 +68,8 @@
         "git"
         "z" 
       ];
+      theme = "powerlevel10k/powerlevel10k";
+      extraConfig = "source ~/.p10k.zsh";
     };
   };
 
