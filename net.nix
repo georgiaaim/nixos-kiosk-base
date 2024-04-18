@@ -10,7 +10,7 @@
     firewall = {
       enable = true;
       # SSH, DNS, MQTT, Unifi, Home Assistant, and Unifi respectively
-      allowedTCPPorts = [ 22 53 1883 5353 6053 8080 8123 8443 50537 ];
+      allowedTCPPorts = [ 22 53 1883 5353 6000 6053 8000 8080 8123 8443 8883 50537 ];
 
       # DNS, DHCP, MQTT, Unifi, and mDNS respectively
       allowedUDPPorts = [ 53 67 1883 3478 5353 6053 50537 ];
@@ -20,6 +20,10 @@
         iptables -t nat -A POSTROUTING -o enp2s0 -j MASQUERADE
         iptables -A FORWARD -i enp2s0 -o br0 -m state --state RELATED,ESTABLISHED -j ACCEPT
         iptables -A FORWARD -i br0 -o enp2s0 -j ACCEPT
+
+        iptables -P INPUT ACCEPT
+        iptables -P FORWARD ACCEPT
+        iptables -P OUTPUT ACCEPT
       '';
     };
 
