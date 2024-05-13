@@ -35,23 +35,6 @@
   system.stateVersion = "24.05";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  services.xserver = {
-    enable = true;
-    displayManager = {
-      gdm = {
-        enable = true;
-        wayland = true;
-        autoSuspend = false;
-      };
-      defaultSession = "gnome";
-      autoLogin = {
-        enable = true;
-        user = "kiosk";
-      };
-    };
-    desktopManager.gnome.enable = true;
-  };
-
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 

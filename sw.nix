@@ -34,8 +34,7 @@ in
   };
 
   virtualisation = {
-    # Enable libvirtd and Docker
-    libvirtd = {
+    # Enable libvirtd and Docker libvirtd = {
       enable = true;
       nss.enable = true;
       qemu.ovmf.enable = true;
@@ -79,6 +78,29 @@ in
     serviceConfig = {
       ExecStart = "${virtInstallScript}/bin/virt-install-hass";
     };
+  };
+
+  services.xserver = {
+    enable = true;
+    displayManager = {
+      gdm = {
+        enable = true;
+        wayland = true;
+        autoSuspend = false;
+      };
+      defaultSession = "gnome";
+      autoLogin = {
+        enable = true;
+        user = "kiosk";
+      };
+    };
+    desktopManager.gnome.enable = true;
+  };
+
+  services.cage = {
+    enable = true;
+    program = "${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
+    user = "kiosk";
   };
 
   # Extra software packages to install
