@@ -89,13 +89,16 @@ in
         wayland = true;
         autoSuspend = false;
       };
-      defaultSession = "gnome";
-      autoLogin = {
-        enable = true;
-        user = "kiosk";
-      };
     };
     desktopManager.gnome.enable = true;
+  };
+
+  services.displayManager = {
+    defaultSession = "gnome";
+    autoLogin = {
+      enable = true;
+      user = "kiosk";
+    };
   };
 
   # Extra software packages to install
