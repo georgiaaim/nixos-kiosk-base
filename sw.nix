@@ -101,22 +101,7 @@ in
     };
   };
 
-  programs.dconf = {
-    enable = true;
-    settings = {
-      "org/gnome/desktop/screensaver" = {
-        "lock-enabled" = false;
-      };
-      "org/gnome/shell" = {
-        disable-user-extensions = false;
-        enabled-extensions = [
-          "no-overview@fthx"
-        ];
-      };
-    };
-  };
-
-  # Extra software packages to install
+    # Extra software packages to install
   environment.systemPackages = with pkgs; [
     gnome.gnome-tweaks
     parted
