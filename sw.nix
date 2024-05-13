@@ -112,6 +112,7 @@ in
         enabled-extensions = [
           "no-overview@fthx"
         ];
+      };
     };
   };
 
