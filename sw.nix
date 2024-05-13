@@ -34,7 +34,8 @@ in
   };
 
   virtualisation = {
-    # Enable libvirtd and Docker libvirtd = {
+    # Enable libvirtd and Docker 
+    libvirtd = {
       enable = true;
       nss.enable = true;
       qemu.ovmf.enable = true;
