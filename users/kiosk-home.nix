@@ -14,8 +14,7 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  programs.dconf = {
-    enable = true;
+  dconf = {
     settings = {
       "org/gnome/desktop/screensaver" = {
         "lock-enabled" = false;
