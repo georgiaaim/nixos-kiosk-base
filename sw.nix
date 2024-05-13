@@ -98,12 +98,6 @@ in
     desktopManager.gnome.enable = true;
   };
 
-  services.cage = {
-    enable = true;
-    program = "${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
-    user = "kiosk";
-  };
-
   # Extra software packages to install
   environment.systemPackages = with pkgs; [
     parted
