@@ -63,6 +63,7 @@
       Hidden=false
       NoDisplay=false
       X-GNOME-Autostart-enabled=true
+      X-GNOME-Autostart-Delay=5
     '';
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
