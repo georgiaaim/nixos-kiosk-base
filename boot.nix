@@ -11,7 +11,6 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-
   # Set up GRUB 2 with GA-AIM logo as splash image
   boot.loader.grub = {
     enable = true;
@@ -41,9 +40,6 @@
   # Enable SSH for remote access
   services.openssh.enable = true;
   services.openssh.settings.PasswordAuthentication = true;
-
-  # Enable CUPS for printing
-  services.printing.enable = true;
 
   # Sound
   sound.enable = true;
