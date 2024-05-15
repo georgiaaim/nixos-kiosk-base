@@ -83,20 +83,15 @@ in
 
   programs.dconf.enable = true;
 
-  services.xserver = {
-    enable = true;
-    displayManager = {
-      gdm = {
-        enable = true;
-        wayland = true;
-        autoSuspend = false;
-      };
-    };
-    desktopManager.gnome.enable = true;
-  };
-
   services.displayManager = {
-    defaultSession = "gnome";
+    enable = true;
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+      theme = "breeze";
+    };
+    defaultSession = "plasma";
+    plasma6.enable = true;
     autoLogin = {
       enable = true;
       user = "kiosk";

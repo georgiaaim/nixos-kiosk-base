@@ -14,19 +14,19 @@
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
-  dconf = {
-    settings = {
-      "org/gnome/desktop/screensaver" = {
-        "lock-enabled" = false;
-      };
-      "org/gnome/shell" = {
-        disable-user-extensions = false;
-        enabled-extensions = [
-          "no-overview@fthx"
-        ];
-      };
-    };
-  };
+  #dconf = {
+  #  settings = {
+  #    "org/gnome/desktop/screensaver" = {
+  #      "lock-enabled" = false;
+  #    };
+  #    "org/gnome/shell" = {
+  #      disable-user-extensions = false;
+  #      enabled-extensions = [
+  #        "no-overview@fthx"
+  #      ];
+  #    };
+  #  };
+  #};
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -48,7 +48,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    pkgs.gnomeExtensions.no-overview
+    #pkgs.gnomeExtensions.no-overview
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -62,7 +62,7 @@
       Terminal=false
       Hidden=false
       NoDisplay=false
-      X-GNOME-Autostart-enabled=true
+      #X-GNOME-Autostart-enabled=true
     '';
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
