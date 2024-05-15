@@ -19,8 +19,11 @@
       "org/gnome/desktop/screensaver" = {
         "lock-enabled" = false;
       };
-      "org/gnome/shell/extensions/dash-to-dock" = {
-        disable-overview-on-startup = true;
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = [
+          "no-overview@fthx"
+        ];
       };
     };
   };
@@ -45,6 +48,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
+    pkgs.gnomeExtensions.no-overview
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -59,7 +63,6 @@
       Hidden=false
       NoDisplay=false
       X-GNOME-Autostart-enabled=true
-      X-GNOME-Autostart-Delay=5
     '';
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
