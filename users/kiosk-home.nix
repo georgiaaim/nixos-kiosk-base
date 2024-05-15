@@ -54,16 +54,6 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/autostart/kiosk.desktop".text = ''
-      [Desktop Entry]
-      Type=Application
-      Name=Kiosk
-      Exec=/bin/sleep 5 && ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123
-      Terminal=false
-      Hidden=false
-      NoDisplay=false
-      #X-GNOME-Autostart-enabled=true
-    '';
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -89,6 +79,24 @@
   #
   home.sessionVariables = {
     EDITOR = "nvim";
+  };
+
+  systemd.users.services.firefox-kiosk = {
+    Unit = {
+      Description = "Firefox Kiosk";
+      After = [ "graphical.target" ];
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
+      Restart = "always";
+      RestartSec = 10;
+    };
   };
 
   # Let Home Manager install and manage itself.

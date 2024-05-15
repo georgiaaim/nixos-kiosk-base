@@ -89,10 +89,14 @@ in
     sddm = {
       enable = true;
       wayland.enable = true;
-    };
-    autoLogin = {
-      enable = true;
-      user = "kiosk";
+      wayland.compositor = "kwin";
+      settings = {
+        Autologin = {
+          Session = "plasma.desktop";
+          User = "kiosk";
+          Relogin = true;
+        };
+      };
     };
   };
 
