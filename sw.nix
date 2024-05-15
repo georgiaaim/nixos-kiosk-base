@@ -83,6 +83,7 @@ in
 
   programs.dconf.enable = true;
 
+  services.desktopManager.plasma6.enable = true;
   services.displayManager = {
     enable = true;
     sddm = {
@@ -91,7 +92,6 @@ in
       theme = "breeze";
     };
     defaultSession = "plasma";
-    plasma6.enable = true;
     autoLogin = {
       enable = true;
       user = "kiosk";
