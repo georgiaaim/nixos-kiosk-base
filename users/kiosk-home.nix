@@ -58,7 +58,7 @@
       [Desktop Entry]
       Type=Application
       Name=Kiosk
-      Exec=${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123
+      Exec=/bin/sleep 5 && ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123
       Terminal=false
       Hidden=false
       NoDisplay=false
