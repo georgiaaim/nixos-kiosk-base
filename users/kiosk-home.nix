@@ -81,7 +81,7 @@
     EDITOR = "nvim";
   };
 
-  systemd.users.services.firefox-kiosk = {
+  systemd.user.services.firefox-kiosk = {
     Unit = {
       Description = "Firefox Kiosk";
       After = [ "graphical.target" ];
