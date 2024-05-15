@@ -19,11 +19,8 @@
       "org/gnome/desktop/screensaver" = {
         "lock-enabled" = false;
       };
-      "org/gnome/shell" = {
-        disable-user-extensions = false;
-        enabled-extensions = [
-          "no-overview@fthx"
-        ];
+      "org/gnome/shell/extensions/dash-to-dock" = {
+        disable-overview-on-startup = true;
       };
     };
   };
@@ -48,7 +45,6 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    pkgs.gnomeExtensions.no-overview
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
