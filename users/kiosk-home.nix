@@ -94,7 +94,7 @@
 
     Service = {
       Type = "simple";
-      ExecStart = "WAYLAND_DISPLAY=wayland-1 ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
+      ExecStart = "DISPLAY=:0.1 ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
       Restart = "always";
       RestartSec = 10;
     };
