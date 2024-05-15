@@ -81,7 +81,7 @@ in
     };
   };
 
-  programs.dconf.enable = true;
+  # programs.dconf.enable = true;
 
   services.desktopManager.plasma6.enable = true;
   services.displayManager = {
@@ -89,9 +89,7 @@ in
     sddm = {
       enable = true;
       wayland.enable = true;
-      theme = "breeze";
     };
-    defaultSession = "plasma";
     autoLogin = {
       enable = true;
       user = "kiosk";
@@ -100,7 +98,7 @@ in
 
     # Extra software packages to install
   environment.systemPackages = with pkgs; [
-    gnome.gnome-tweaks
+    # gnome.gnome-tweaks
     parted
     git
     virt-manager
