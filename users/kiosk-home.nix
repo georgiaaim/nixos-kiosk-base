@@ -84,7 +84,8 @@
   systemd.user.services.firefox-kiosk = {
     Unit = {
       Description = "Firefox Kiosk";
-      After = [ "graphical.target" ];
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
     };
 
     Install = {
@@ -93,7 +94,7 @@
 
     Service = {
       Type = "simple";
-      ExecStart = "${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
+      ExecStart = "WAYLAND_DISPLAY=wayland-1 ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
       Restart = "always";
       RestartSec = 10;
     };
