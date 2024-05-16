@@ -2,10 +2,16 @@
 let
   firefox-launch-script = pkgs.writeScriptBin "firefox-launch" ''
     #!/bin/sh
+    monitors=$(xrandr --query | grep " connected" | cut -d" " -f1)
+    monitor_count=$(echo $monitors | wc -w)
     ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123 &
-    sleep 5
-    ${pkgs.wmctrl}/bin/wmctrl -r 'Firefox' -e  0,2568,720,1280,720
-    ${pkgs.firefox}/bin/firefox -new-instance --kiosk http://homeassistant.local:8123
+    if [ $monitor_count -gt 1 ]; then
+      ${pkgs.firefox}/bin/firefox -new-window --kiosk http://homeassistant.local:8123 &
+      window_ids=$(wmctrl -l | grep "Firefox" | awk '{print $1}')
+      sleep 10
+      ${pkgs.wmctrl}/bin/wmctrl -i -r $(echo $window_ids | awk '{print $1}') -e 0,2560,720,1280,720
+      ${pkgs.wmctrl}/bin/wmctrl -i -r $(echo $window_ids | awk '{print $2}') -e 0,0,0,1440,900
+    fi
   '';
 in
 {
