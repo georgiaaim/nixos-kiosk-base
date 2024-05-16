@@ -14,6 +14,12 @@ let
       ${pkgs.wmctrl}/bin/wmctrl -i -r $(echo $window_ids | awk '{print $2}') -e 0,0,0,1440,900
     fi
   '';
+
+  firefox-launch-pre = pkgs.writeScriptBin "firefox-launch-pre" ''
+    #!/bin/sh
+    pkill -9 firefox
+    sleep 5
+  '';
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -109,6 +115,7 @@ in
 
     Service = {
       Type = "forking";
+      ExecStartPre = "${firefox-launch-script}/bin/firefox-launch-pre";
       ExecStart = "${firefox-launch-script}/bin/firefox-launch";
       Restart = "always";
       RestartSec = 10;
