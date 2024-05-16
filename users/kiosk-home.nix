@@ -115,7 +115,7 @@ in
 
     Service = {
       Type = "forking";
-      ExecStartPre = "${firefox-launch-script}/bin/firefox-launch-pre";
+      ExecStartPre = "${firefox-launch-pre}/bin/firefox-launch-pre";
       ExecStart = "${firefox-launch-script}/bin/firefox-launch";
       Restart = "always";
       RestartSec = 10;
