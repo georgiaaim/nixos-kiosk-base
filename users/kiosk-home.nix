@@ -98,7 +98,7 @@ in
 
     Service = {
       Type = "simple";
-      ExecStartPre = "sleep 10";
+      ExecStartPre = "${pkgs.uutils-coreutils-noprefix}/bin/sleep 10";
       ExecStart = "${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
       Restart = "always";
       RestartSec = 10;
