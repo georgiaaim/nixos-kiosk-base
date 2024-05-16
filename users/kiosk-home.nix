@@ -1,4 +1,12 @@
 { config, pkgs, ... }:
+let
+  firefox-launch-script = pkgs.writeScriptBin "firefox-launch" ''
+    #!/bin/sh
+    ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123 &
+    ${pkgs.wmctrl}/bin/wmctrl -r 'Firefox' -e  0,2568,720,-1,-1
+    ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123
+  '';
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -40,7 +48,6 @@
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
     (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
     # # environment:
