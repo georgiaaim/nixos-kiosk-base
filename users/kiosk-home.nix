@@ -101,7 +101,7 @@ in
 
     Service = {
       Type = "simple";
-      ExecStart = "${firefox-launch-script}";
+      ExecStart = "${firefox-launch-script}/bin/firefox-launch";
       Restart = "always";
       RestartSec = 10;
     };
