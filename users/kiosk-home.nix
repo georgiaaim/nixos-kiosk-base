@@ -108,7 +108,7 @@ in
     };
 
     Service = {
-      Type = "simple";
+      Type = "forking";
       ExecStart = "${firefox-launch-script}/bin/firefox-launch";
       Restart = "always";
       RestartSec = 10;
