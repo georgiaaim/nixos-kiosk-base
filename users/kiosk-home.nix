@@ -3,8 +3,9 @@ let
   firefox-launch-script = pkgs.writeScriptBin "firefox-launch" ''
     #!/bin/sh
     ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123 &
-    ${pkgs.wmctrl}/bin/wmctrl -r 'Firefox' -e  0,2568,720,-1,-1
-    ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123
+    sleep 5
+    ${pkgs.wmctrl}/bin/wmctrl -r 'Firefox' -e  0,2568,720,1280,720
+    ${pkgs.firefox}/bin/firefox -new-instance --kiosk http://homeassistant.local:8123
   '';
 in
 {
