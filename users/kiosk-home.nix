@@ -2,23 +2,6 @@
 let
   firefox-launch-script = pkgs.writeScriptBin "firefox-launch" ''
     #!/bin/sh
-    monitors=$(xrandr --query | grep " connected" | cut -d" " -f1)
-    monitor_count=$(echo $monitors | wc -w)
-    ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123 &
-    sleep 5
-    if [ $monitor_count -gt 1 ]; then
-      ${pkgs.firefox}/bin/firefox -new-window --kiosk http://homeassistant.local:8123 &
-      window_ids=$(wmctrl -l | grep "Firefox" | awk '{print $1}')
-      sleep 4
-      ${pkgs.wmctrl}/bin/wmctrl -i -r $(echo $window_ids | awk '{print $1}') -e 0,2560,720,1280,720
-      ${pkgs.wmctrl}/bin/wmctrl -i -r $(echo $window_ids | awk '{print $2}') -e 0,0,0,1440,900
-    fi
-  '';
-
-  firefox-launch-pre = pkgs.writeScriptBin "firefox-launch-pre" ''
-    #!/bin/sh
-    pkill -9 firefox
-    sleep 5
   '';
 in
 {
@@ -114,9 +97,8 @@ in
     };
 
     Service = {
-      Type = "forking";
-      ExecStartPre = "${firefox-launch-pre}/bin/firefox-launch-pre";
-      ExecStart = "${firefox-launch-script}/bin/firefox-launch";
+      Type = "simple";
+      ExecStart = "${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
       Restart = "always";
       RestartSec = 10;
     };
