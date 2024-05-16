@@ -104,7 +104,7 @@ in
     # Extra software packages to install
   environment.systemPackages = with pkgs; [
     # gnome.gnome-tweaks
-    wmcrtl
+    wmctrl
     parted
     git
     virt-manager
