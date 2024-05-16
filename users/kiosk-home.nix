@@ -94,8 +94,9 @@
 
     Service = {
       Type = "simple";
-      ExecStartPre = "DISPLAY=:0 ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
-      ExecStart = "DISPLAY=:1 ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
+      ExecStartPre = "DISPLAY=:0 ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123 \
+        && ${pkgs.wmctrl}/bin/wmctrl -r 'Firefox' -e  0,0,0,2568,720";
+      ExecStart = "DISPLAY=:0 ${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
       Restart = "always";
       RestartSec = 10;
     };
