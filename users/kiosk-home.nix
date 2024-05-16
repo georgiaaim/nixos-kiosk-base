@@ -88,8 +88,8 @@ in
   systemd.user.services.firefox-kiosk = {
     Unit = {
       Description = "Firefox Kiosk";
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+      PartOf = [ "display-manager.target" ];
     };
 
     Install = {
@@ -98,7 +98,7 @@ in
 
     Service = {
       Type = "simple";
-      ExecStartPre = "${pkgs.uutils-coreutils-noprefix}/bin/sleep 10";
+      # ExecStartPre = "${pkgs.uutils-coreutils-noprefix}/bin/sleep 10";
       ExecStart = "${pkgs.firefox}/bin/firefox --kiosk http://homeassistant.local:8123";
       Restart = "always";
       RestartSec = 10;
