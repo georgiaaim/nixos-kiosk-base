@@ -107,10 +107,14 @@ in
     wmctrl
     parted
     git
+    git-lfs
     virt-manager
     xz
     firefox
   ];
+
+  programs.git.enable = true;
+  programs.git.lfs.enable = true;
 
   # Enable the Neovim and Zsh programs
   programs.neovim.enable = true;
