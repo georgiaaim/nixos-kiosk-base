@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib }:
 {
   # Bootloader configuration for systemd-boot (UEFI systems)
   boot.loader.efi.canTouchEfiVariables = true;
