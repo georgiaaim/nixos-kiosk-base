@@ -1,4 +1,4 @@
-{pkgs}: 
+{pkgs, ...}: 
 let
   # Fetch the Home Assistant OS qcow2 image
   home-assistant-qcow2 = pkgs.fetchurl {

@@ -11,11 +11,11 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, disko }@inputs: {
+  outputs = { self, home-manager, disko }: {
     nixosModules.baseEnvironment = {
       imports = [
         home-manager.nixosModules.home-manager 
-        #disko.nixosModules.disko
+        disko.nixosModules.disko
         ./boot.nix
         ./disks.nix
         ./net.nix
