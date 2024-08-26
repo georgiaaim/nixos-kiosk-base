@@ -8,7 +8,7 @@ let
 
   kioskAdminTomasSSHKeys = builtins.fetchurl {
     url = "https://github.com/Tomz295.keys";
-    sha256 = "1gq7z4gdmzg2dig3lgn5zyn6lmzq5r2ayqhmjnzy2s61yj5zkc7n";
+    sha256 = "0m84pb0k4cxgz8dn81d3kwrxz0f6qcm59if65kmmd4574pwd9ad7";
   };
 
   kioskAdminMarcusSSHKeys = builtins.fetchurl {
