@@ -24,7 +24,7 @@
   
   # Boot silently
   boot.kernelParams = [ "quiet" "rd.systemd.show_status=false"]; # Ensure a quiet boot
-  boot.consoleLogLevel = 0;
+  boot.consoleLogLevel = lib.mkDefault 0;
 
   # Set up locale
   time.timeZone = "America/New_York";
