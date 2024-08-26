@@ -1,7 +1,7 @@
 { config, pkgs, lib, ...}:
 {
   # Bootloader configuration for systemd-boot (UEFI systems)
-  boot.loader.efi.cantouchefivariables = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
   boot.initrd.verbose = false;
   boot.initrd.systemd.enable = true;
