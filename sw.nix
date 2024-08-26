@@ -33,29 +33,29 @@ in
     '';
   };
 
-  # virtualisation = {
-  #   # Enable libvirtd and Docker 
-  #   libvirtd = {
-  #     enable = true;
-  #     nss.enable = true;
-  #     qemu.ovmf.enable = true;
-  #     allowedBridges = [ "br0" ];
-  #   };
-  #   docker.enable = true;
-  #
-  #   # Define the Docker container(s)
-  #   oci-containers = {
-  #     backend = "docker";
-  #     containers = {
-  #       # Unifi Controller Docker Container
-  #       unifi = {
-  #         image = "jacobalberty/unifi:latest";
-  #         extraOptions = [ "--net=host" ];
-  #         volumes = [ "/etc/unifi:/unifi" ];
-  #       };
-  #     };
-  #   };
-  # };
+  virtualisation = {
+    # Enable libvirtd and Docker 
+    libvirtd = {
+      enable = true;
+      nss.enable = true;
+      qemu.ovmf.enable = true;
+      allowedBridges = [ "br0" ];
+    };
+    docker.enable = true;
+
+    # Define the Docker container(s)
+    oci-containers = {
+      backend = "docker";
+      containers = {
+        # Unifi Controller Docker Container
+        unifi = {
+          image = "jacobalberty/unifi:latest";
+          extraOptions = [ "--net=host" ];
+          volumes = [ "/etc/unifi:/unifi" ];
+        };
+      };
+    };
+  };
 
   # Ensure the Home Assistant OS qcow2 image is available in a writable location
   system.activationScripts.hass-qcow2 = {
