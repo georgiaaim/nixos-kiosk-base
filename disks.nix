@@ -9,7 +9,7 @@
     ];
 
   disko.devices = {
-    disk1 = {
+    disk.main = {
       device = lib.mkDefault "/dev/mmcblk0";
       type = "disk";
       content = {
