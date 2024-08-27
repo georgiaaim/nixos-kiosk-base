@@ -38,6 +38,7 @@ in
     libvirtd = {
       enable = true;
       nss.enable = true;
+      qemuPackage = pkgs.qemu;
       qemu.ovmf.enable = true;
       allowedBridges = [ "br0" ];
     };
@@ -111,12 +112,6 @@ in
     virt-manager
     xz
     firefox
-  ];
-  
-  nixpkgs.overlays = [
-    (final: prev: {
-      cloud-hypervisor = null;
-    })
   ];
 
   programs.git.enable = true;
