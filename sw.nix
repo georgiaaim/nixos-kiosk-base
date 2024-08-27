@@ -4,7 +4,7 @@ let
   home-assistant-qcow2 = pkgs.fetchurl {
     name = "home-assistant.qcow2";
     url = "https://github.com/home-assistant/operating-system/releases/download/13.1/haos_ova-13.1.qcow2.xz";
-    sha256 = "0imdz0myvbp10kxn0i1p6pxdaz24d7r07ikvz5xpkrakgikp5s3c";
+    sha256 = "O3okbo49vHvxmeBnzABDSH4zlcJZcJ8cmrWrZC5Jves=";
     postFetch = ''
       cp $out src.xz
       ${pkgs.xz}/bin/unxz src.xz --stdout > $out
