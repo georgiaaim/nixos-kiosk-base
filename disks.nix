@@ -16,7 +16,10 @@
         type = "gpt";
         partitions = {
           boot = {
-            name = "boot";
+            size = "1M";
+            type = "EF02";
+          };
+          ESP = {
             size = "512M";
             type = "EF00"; # EFI System Partition for UEFI boot
             content = {

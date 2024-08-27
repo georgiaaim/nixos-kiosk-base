@@ -112,6 +112,12 @@ in
     xz
     firefox
   ];
+  
+  nixpkgs.overlays = [
+    (final: prev: {
+      cloud-hypervisor = null;
+    })
+  ];
 
   programs.git.enable = true;
   programs.git.lfs.enable = true;
