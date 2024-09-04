@@ -30,7 +30,7 @@
           };
           swap = {
             name = "swap";
-            size = "8G";
+            size = "4G";
             type = "8200"; # Linux swap partition
             content = {
               type = "swap";
