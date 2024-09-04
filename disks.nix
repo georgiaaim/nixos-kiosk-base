@@ -10,7 +10,7 @@
 
   disko.devices = {
     disk.main = {
-      device = lib.mkDefault "/dev/mmcblk0";
+      device = lib.mkDefault "/dev/sda";
       type = "disk";
       content = {
         type = "gpt";
@@ -30,7 +30,7 @@
           };
           swap = {
             name = "swap";
-            size = "4G";
+            size = "8G";
             type = "8200"; # Linux swap partition
             content = {
               type = "swap";
