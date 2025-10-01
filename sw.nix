@@ -38,7 +38,7 @@ in
     libvirtd = {
       enable = true;
       nss.enable = true;
-      qemuPackage = pkgs.qemu;
+      qemu.package = pkgs.qemu;
       qemu.ovmf.enable = true;
       allowedBridges = [ "br0" ];
     };
@@ -86,7 +86,7 @@ in
 
   services.xserver = {
     enable = true;
-    desktopManager.plasma5.enable = true;
+    desktopManager.plasma.enable = true;
   };
 
   services.displayManager = {
