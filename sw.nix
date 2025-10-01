@@ -86,7 +86,7 @@ in
 
   services.xserver = {
     enable = true;
-    desktopManager.plasma.enable = true;
+    desktopManager.plasma6.enable = true;
   };
 
   services.displayManager = {
