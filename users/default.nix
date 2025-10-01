@@ -3,7 +3,6 @@
 let
   kioskAdminHunterSSHKeys = builtins.fetchurl {
     url = "https://github.com/jyumpp.keys";
-    sha256 = "0xv268apcb3jaygp8m18k0z1y6p3xc76by6i8478lkaqp1nclsyc";
   };
 
   kioskAdminTomasSSHKeys = builtins.fetchurl {
