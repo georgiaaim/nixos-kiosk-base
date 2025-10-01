@@ -6,18 +6,12 @@ let
     sha256 = "1axvz83ks2kpc06ahc5qp3b89ga308nmaqwd17nril2kjp8k4y8f";
   };
 
-  kioskAdminTomasSSHKeys = builtins.fetchurl {
-    url = "https://github.com/Tomz295.keys";
-    sha256 = "0m84pb0k4cxgz8dn81d3kwrxz0f6qcm59if65kmmd4574pwd9ad7";
-  };
-
   kioskAdminMarcusSSHKeys = builtins.fetchurl {
     url = "https://github.com/mardawgster.keys";
-    sha256 = "011pm4ld3h1h2zf9rzlzm8x6hqf1kg2w7rc70rkx3dm66jf5l7b3";
+    sha256 = "0mdqa9w1p6cmli6976v4wi0sw9r4p5prkj7lzfd1877wk11c9c73";
   };
 
   allSSHKeys = builtins.readFile kioskAdminHunterSSHKeys + "\n" + 
-               builtins.readFile kioskAdminTomasSSHKeys + "\n" + 
                builtins.readFile kioskAdminMarcusSSHKeys;
 
   sshKeys = builtins.filter (s: s != "") (lib.splitString "\n" allSSHKeys);
