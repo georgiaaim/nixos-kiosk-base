@@ -13,7 +13,7 @@
 
   # Set up GRUB 2 with GA-AIM logo as splash image
   boot.loader.grub = {
-    enable = true;
+    enable = lib.mkForce true;
     device = "nodev"; # for EFI systems, set to your specific device, or use "nodev" for UEFI-only systems
     efiSupport = true;
     gfxmodeEfi = "auto";
