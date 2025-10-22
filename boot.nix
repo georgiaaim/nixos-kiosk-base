@@ -1,10 +1,10 @@
 { config, pkgs, lib, ...}:
 {
   # Bootloader configuration for systemd-boot (UEFI systems)
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 0;
-  boot.initrd.verbose = false;
-  boot.initrd.systemd.enable = true;
+  boot.loader.efi.canTouchEfiVariables = lib.mkDefault true;
+  boot.loader.timeout = lib.mkDefault 0;
+  boot.initrd.verbose = lib.mkDefault false;
+  boot.initrd.systemd.enable = lib.mkDefault true;
 
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "usb_storage" "usbhid" "sd_mod" "sdhci_pci" ];
   boot.initrd.kernelModules = [ ];
