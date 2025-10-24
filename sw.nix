@@ -3,8 +3,8 @@ let
   # Fetch the Home Assistant OS qcow2 image
   home-assistant-qcow2 = pkgs.fetchurl {
     name = "home-assistant.qcow2";
-    url = "https://github.com/home-assistant/operating-system/releases/download/13.1/haos_ova-13.1.qcow2.xz";
-    sha256 = "O3okbo49vHvxmeBnzABDSH4zlcJZcJ8cmrWrZC5Jves=";
+    url = "https://github.com/home-assistant/operating-system/releases/download/16.2/haos_ova-16.2.qcow2.xz";
+    sha256 = "0k2kw46azji81g074ms13ziaxkq7gzdn023ydvczip6lcaw24fd5";
     postFetch = ''
       cp $out src.xz
       ${pkgs.xz}/bin/unxz src.xz --stdout > $out
